@@ -1,0 +1,18 @@
+# Local terraform directories
+**/.terraform/*
+
+# we dont want lock files at a module level
+.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+secrets.auto.tfvars
+terraform.tfvars
+
+# other common dev files/folders
+/.ssh
+/.idea
+/.vscode

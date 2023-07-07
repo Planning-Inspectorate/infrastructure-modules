@@ -1,0 +1,16 @@
+variable "environment" {
+  type        = string
+  description = "The environment name. Used as a tag and in naming the resource group"
+}
+
+variable "location" {
+  type        = string
+  description = "The region resources will be deployed to"
+  default     = "northeurope"
+}
+
+variable "tags" {
+  type        = map(string)
+  description = "List of tags to be applied to resources"
+  default     = {}
+}

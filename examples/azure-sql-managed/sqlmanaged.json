@@ -1,0 +1,75 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.1",
+    "parameters": {
+        "administratorLogin": {
+            "type": "string"
+        },
+        "administratorLoginPassword": {
+            "type": "securestring"
+        },
+        "location": {
+            "type": "string"
+        },
+        "managedInstanceName": {
+            "type": "string"
+        },
+        "subnetId": {
+            "type": "string"
+        },
+        "skuName": {
+            "type": "string"
+        },
+        "skuEdition": {
+            "type": "string"
+        },
+        "storageSizeInGB": {
+            "type": "string"
+        },
+        "vCores": {
+            "type": "string"
+        },
+        "licenseType": {
+            "type": "string"
+        },
+        "hardwareFamily": {
+            "type": "string"
+        },
+        "tags" : {
+          "type": "string",
+          "defaultValue": "{\"component\": \"sql\"}"
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-05-01-preview",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "location": "[parameters('location')]",
+            "tags": "[json(parameters('tags'))]",
+            "name": "[parameters('managedInstanceName')]",
+            "sku": {
+                "name": "[parameters('skuName')]",
+                "tier": "[parameters('skuEdition')]"
+            },
+            "properties": {
+                "administratorLogin": "[parameters('administratorLogin')]",
+                "administratorLoginPassword": "[parameters('administratorLoginPassword')]",
+                "subnetId": "[parameters('subnetId')]",
+                "storageSizeInGB": "[int(parameters('storageSizeInGB'))]",
+                "vCores": "[int(parameters('vCores'))]",
+                "licenseType": "[parameters('licenseType')]",
+                "hardwareFamily": "[parameters('hardwareFamily')]"
+            },
+            "type": "Microsoft.Sql/managedInstances"
+        }
+    ],
+    "variables": {},
+    "outputs": {
+        "fqdn": {
+            "value": "[reference(resourceId('Microsoft.Sql/managedInstances', parameters('managedInstanceName'))).fullyQualifiedDomainName]",
+            "type" : "string"
+        }
+    }
+}

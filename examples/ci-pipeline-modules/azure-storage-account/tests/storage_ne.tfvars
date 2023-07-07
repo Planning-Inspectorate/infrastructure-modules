@@ -1,0 +1,2 @@
+environment = "ci"
+location = "northeurope"
