@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - '*'
+
+pool:
+  vmImage: ubuntu-22.04
+
+stages:
+- stage: auto_release
+  dependsOn: []
+
+  jobs:
+  - job: auto_release
+    displayName: auto_release
+    workspace:
+      clean: all
+    timeoutInMinutes: 15
+    dependsOn: []
+    steps:
+      - checkout: self
+        clean: true
+        persistCredentials: true
+      - pwsh: |
+          $(Build.SourcesDirectory)\release-automation\Tag-Repo.ps1 -SourceBranch $(Build.SourceBranchName) -SourceDirectory $(Build.SourcesDirectory) -Mode "$env:MODE"
+        displayName: 'execute_auto_release_script'
+        name: 'execute_auto_release_script'
