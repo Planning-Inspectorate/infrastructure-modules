@@ -1,0 +1,18 @@
+# Local terraform directories
+**/.terraform/*
+
+# examples act as integration tests bewteen resources so we don't want to lock versions
+.terraform.lock.hcl
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+secrets.auto.tfvars
+terraform.tfvars
+
+# other common dev files/folders
+/.ssh
+/.idea
+/.vscode
