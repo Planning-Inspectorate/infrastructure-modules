@@ -1,3 +1,0 @@
-/*
-    Terraform configuration file defining data elements
-*/

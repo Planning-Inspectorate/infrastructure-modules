@@ -1,4 +1,0 @@
-az config set extension.use_dynamic_install=yes_without_prompt
-az extension add --upgrade -n datafactory
-az account set -s ${subscription}
-az datafactory integration-runtime show -n ${name} --factory-name ${data_factory_name} -g ${data_factory_resource_group_name} --query "{id:id}"
