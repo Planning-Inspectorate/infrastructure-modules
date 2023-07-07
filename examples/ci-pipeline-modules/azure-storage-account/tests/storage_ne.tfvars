@@ -1,2 +1,0 @@
-environment = "ci"
-location = "northeurope"
