@@ -12,7 +12,7 @@ $tagInfoJson = Get-Content (join-path -Path $SourceDirectory -ChildPath versioni
 $tagInfoMajorVersion = [int]$tagInfoJson.major_version_number
 
 # Only perform the automation if the current branch is master or a branch of the form "<digits>.x", e.g. 1.x, 14.x
-if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "master" ) ) {
+if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "main" ) ) {
     # Derive latest existing minor version and increment
     $commits = $(git --no-pager log --format="%H %D")
     # write-host "Commits: $commits"
