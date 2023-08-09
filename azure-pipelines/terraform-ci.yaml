@@ -12,6 +12,8 @@ variables:
 - group: Terraform ${{ parameters.environment }}
 - name: environment
   value: ${{ lower(parameters.environment) }}
+- name: workingDirectory
+  value: $(Build.Repository.LocalPath)/modules/**
 
 pr: none
 
@@ -48,26 +50,26 @@ stages:
       - template: steps/terraform-init.yaml
         parameters:
           environment: ${{ variables.environment }}
-          workingDirectory: infrastructure
+          workingDirectory: ${{ variables.workingDirectory }}
 
       # Run Terraform format
       - template: steps/terraform-format.yaml
         parameters:
-          workingDirectory: infrastructure
+          workingDirectory: ${{ variables.workingDirectory }}
 
       # Run Terraform validate
       - template: steps/terraform-validate.yaml
         parameters:
-          workingDirectory: infrastructure
+          workingDirectory: ${{ variables.workingDirectory }}
 
       # Run TFLint
       - template: steps/tflint-validate.yaml
         parameters:
           configFilePath: $(Build.Repository.LocalPath)/.tflint.hcl
-          workingDirectory: infrastructure
+          workingDirectory: ${{ variables.workingDirectory }}
 
       # Run Checkov
       - template: steps/checkov-validate.yaml
         parameters:
           framework: terraform
-          workingDirectory: infrastructure
+          workingDirectory: ${{ variables.workingDirectory }}
