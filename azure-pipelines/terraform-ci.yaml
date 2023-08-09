@@ -21,7 +21,7 @@ trigger:
     - '*'
   paths:
     include:
-    - infrastructure
+    - modules/**
     exclude:
     - '**/README.md'
 
