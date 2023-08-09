@@ -13,7 +13,7 @@ variables:
 - name: environment
   value: ${{ lower(parameters.environment) }}
 - name: workingDirectory
-  value: $(Build.Repository.LocalPath)/modules/**
+  value: $(Build.Repository.LocalPath)/modules/node-app-service
 
 pr: none
 
