@@ -1,4 +1,4 @@
-module "azure_region_uks" {
+module "azure_region_ukw" {
   source  = "claranet/regions/azurerm"
   version = "4.2.1"
 

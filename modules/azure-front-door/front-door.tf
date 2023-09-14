@@ -6,14 +6,14 @@ resource "azurerm_cdn_frontdoor_profile" "default" {
 
 resource "azurerm_cdn_frontdoor_endpoint" "default" {
   name                     = var.name
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
 
   tags = local.tags
 }
 
 resource "azurerm_cdn_frontdoor_origin_group" "default" {
   name                     = var.name
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
   session_affinity_enabled = false
 
   load_balancing {
@@ -32,7 +32,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "default" {
 
 resource "azurerm_cdn_frontdoor_origin" "default" {
   name                          = var.name
-  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.common.id
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default.id
 
   enabled                        = true
   host_name                      = var.host_name
@@ -46,9 +46,9 @@ resource "azurerm_cdn_frontdoor_origin" "default" {
 
 resource "azurerm_cdn_frontdoor_route" "default" {
   name                          = var.name
-  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.common.id
-  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.common.id
-  cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.common.id]
+  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.default.id
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default.id
+  cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.default.id]
 
   supported_protocols    = ["Http", "Https"]
   patterns_to_match      = ["/*"]
@@ -61,7 +61,7 @@ resource "azurerm_cdn_frontdoor_route" "default" {
 
 resource "azurerm_cdn_frontdoor_custom_domain" "default" {
   name                     = var.name
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
   host_name                = var.host_name
 
   tls {
@@ -72,11 +72,11 @@ resource "azurerm_cdn_frontdoor_custom_domain" "default" {
 
 resource "azurerm_cdn_frontdoor_rule_set" "search_indexing" {
   name                     = var.name
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
 }
 
 resource "azurerm_cdn_frontdoor_rule" "addrobotstagheader" {
-  depends_on = [azurerm_cdn_frontdoor_origin_group.common, azurerm_cdn_frontdoor_origin.common]
+  depends_on = [azurerm_cdn_frontdoor_origin_group.default, azurerm_cdn_frontdoor_origin.default]
 
   name                      = var.name
   cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.search_indexing.id
@@ -93,7 +93,7 @@ resource "azurerm_cdn_frontdoor_rule" "addrobotstagheader" {
 }
 
 resource "azurerm_cdn_frontdoor_rule" "book_reference_file" {
-  depends_on = [azurerm_cdn_frontdoor_origin_group.common, azurerm_cdn_frontdoor_origin.common]
+  depends_on = [azurerm_cdn_frontdoor_origin_group.default, azurerm_cdn_frontdoor_origin.default]
 
   name                      = var.name
   cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.search_indexing.id
