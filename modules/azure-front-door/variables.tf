@@ -27,7 +27,7 @@ variable "front_door_sku_name" {
 variable "location" {
   description = "The location resources are deployed to in slug format e.g. 'uk-west'"
   type        = string
-  default     = "uk-west"
+  default     = "uk-south"
 }
 
 variable "name" {

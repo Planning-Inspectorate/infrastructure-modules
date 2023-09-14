@@ -20,7 +20,7 @@ This component contains the Azure Front Door and WAF resources. The resources in
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_azure_region_ukw"></a> [azure\_region\_ukw](#module\_azure\_region\_ukw) | claranet/regions/azurerm | 4.2.1 |
+| <a name="module_azure_region_uks"></a> [azure\_region\_uks](#module\_azure\_region\_uks) | claranet/regions/azurerm | 4.2.1 |
 
 ## Resources
 
@@ -49,7 +49,7 @@ This component contains the Azure Front Door and WAF resources. The resources in
 | <a name="input_front_door_sku_name"></a> [front\_door\_sku\_name](#input\_front\_door\_sku\_name) | The SKU name of the Front Door | `string` | `"Premium_AzureFrontDoor"` | no |
 | <a name="input_front_door_waf_mode"></a> [front\_door\_waf\_mode](#input\_front\_door\_waf\_mode) | Indicates if the Web Application Firewall should be in Detection or Prevention mode | `string` | `"Detection"` | no |
 | <a name="input_host_name"></a> [host\_name](#input\_host\_name) | The host name of the resource | `string` | n/a | yes |
-| <a name="input_location"></a> [location](#input\_location) | The location resources are deployed to in slug format e.g. 'uk-west' | `string` | `"uk-west"` | no |
+| <a name="input_location"></a> [location](#input\_location) | The location resources are deployed to in slug format e.g. 'uk-west' | `string` | `"uk-south"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the resource | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group | `string` | n/a | yes |
 
