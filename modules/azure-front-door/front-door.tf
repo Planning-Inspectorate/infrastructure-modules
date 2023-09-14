@@ -1,17 +1,17 @@
-resource "azurerm_cdn_frontdoor_profile" "common" {
+resource "azurerm_cdn_frontdoor_profile" "default" {
   name                = var.name
   resource_group_name = var.resource_group_name
   sku_name            = var.front_door_sku_name
 }
 
-resource "azurerm_cdn_frontdoor_endpoint" "common" {
+resource "azurerm_cdn_frontdoor_endpoint" "default" {
   name                     = var.name
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
 
   tags = local.tags
 }
 
-resource "azurerm_cdn_frontdoor_origin_group" "common" {
+resource "azurerm_cdn_frontdoor_origin_group" "default" {
   name                     = var.name
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
   session_affinity_enabled = false
@@ -30,7 +30,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "common" {
   }
 }
 
-resource "azurerm_cdn_frontdoor_origin" "common" {
+resource "azurerm_cdn_frontdoor_origin" "default" {
   name                          = var.name
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.common.id
 
@@ -44,7 +44,7 @@ resource "azurerm_cdn_frontdoor_origin" "common" {
   certificate_name_check_enabled = true
 }
 
-resource "azurerm_cdn_frontdoor_route" "common" {
+resource "azurerm_cdn_frontdoor_route" "default" {
   name                          = var.name
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.common.id
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.common.id
@@ -59,7 +59,7 @@ resource "azurerm_cdn_frontdoor_route" "common" {
   cdn_frontdoor_origin_path = "/government/organisations/planning-inspectorate"
 }
 
-resource "azurerm_cdn_frontdoor_custom_domain" "common" {
+resource "azurerm_cdn_frontdoor_custom_domain" "default" {
   name                     = var.name
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.common.id
   host_name                = var.host_name
