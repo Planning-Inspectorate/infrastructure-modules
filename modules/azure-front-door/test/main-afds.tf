@@ -31,7 +31,7 @@ module "azure-front-door" {
       session_affinity_enabled = false
 
       origins = {
-        webapp-uswest = {
+        back-office-dev-app-ukwest = {
           hostname = "back-office-dev.planninginspectorate.gov.uk" # this would be the name of the webapp, or the url?
         }
         # webapp-useast = { # backup region
