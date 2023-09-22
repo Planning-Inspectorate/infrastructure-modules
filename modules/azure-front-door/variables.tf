@@ -51,21 +51,21 @@ variable "origin_groups" {
     origins = optional(map(object({
       hostname                            = optional(string) # unsure on this
       certificate_subject_name_validation = optional(bool) # unsure on this, no good google results either
-      http_port                           = optional(number, 80)
-      https_port                          = optional(number, 443)
+      http_port                           = optional(number)
+      https_port                          = optional(number)
       origin_host_header                  = optional(string) # unsure on this
-      priority                            = optional(number, 1)
-      weight                              = optional(number, 100)
-      enabled                             = optional(bool, true)
+      priority                            = optional(number)
+      weight                              = optional(number)
+      enabled                             = optional(bool)
     })))
 
     session_affinity_enabled = optional(bool)
 
     health_probe = optional(object({
-      protocol         = optional(string, "http")
-      interval_seconds = optional(number, 120)
-      probe_method     = optional(string, "HEAD")
-      path             = optional(string, "/")
+      protocol         = optional(string)
+      interval_seconds = optional(number)
+      probe_method     = optional(string)
+      path             = optional(string)
       # enabled          = true # does not like
       # name             = "http" # does not like
     }))
@@ -73,8 +73,8 @@ variable "origin_groups" {
     load_balancing = optional(object({
       # latency_sensitivity_milliseconds = optional(number)
       additional_latency_in_milliseconds = optional(number, 0) # not sure if needed as default is 50. values can be 0-1000
-      sample_size                      = optional(number, 4)
-      successful_samples_required      = optional(number, 2)
+      sample_size                      = optional(number)
+      successful_samples_required      = optional(number)
       # name                             = "Default" # Not sure what this should or could be, but not important.
     }))
   }))
