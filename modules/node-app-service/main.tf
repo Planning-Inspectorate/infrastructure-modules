@@ -3,12 +3,13 @@ resource "azurerm_linux_web_app" "web_app" {
   #checkov:skip=CKV_AZURE_17: Disabling FTP(S) to be tested
   #checkov:skip=CKV_AZURE_78: TLS mutual authentication may not be required
   #checkov:skip=CKV_AZURE_88: Azure Files mount may not be required
-  name                       = "pins-app-${var.service_name}-${var.app_name}-${var.resource_suffix}"
-  location                   = var.location
-  resource_group_name        = var.resource_group_name
-  service_plan_id            = var.app_service_plan_id
-  client_certificate_enabled = false
-  https_only                 = true
+  name                          = "pins-app-${var.service_name}-${var.app_name}-${var.resource_suffix}"
+  location                      = var.location
+  resource_group_name           = var.resource_group_name
+  service_plan_id               = var.app_service_plan_id
+  client_certificate_enabled    = false
+  https_only                    = true
+  public_network_access_enabled = false
 
   app_settings = local.app_settings
 
