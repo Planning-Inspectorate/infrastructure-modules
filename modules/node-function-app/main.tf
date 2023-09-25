@@ -1,11 +1,11 @@
 resource "azurerm_linux_function_app" "function_app" {
-  name                       = "pins-func-${var.service_name}-${var.app_name}-${var.resource_suffix}"
-  location                   = var.location
-  resource_group_name        = var.resource_group_name
-  service_plan_id            = var.app_service_plan_id
-  storage_account_name       = var.function_apps_storage_account
-  storage_account_access_key = var.function_apps_storage_account_access_key
-  https_only                 = true
+  name                          = "pins-func-${var.service_name}-${var.app_name}-${var.resource_suffix}"
+  location                      = var.location
+  resource_group_name           = var.resource_group_name
+  service_plan_id               = var.app_service_plan_id
+  storage_account_name          = var.function_apps_storage_account
+  storage_account_access_key    = var.function_apps_storage_account_access_key
+  https_only                    = true
   public_network_access_enabled = false
 
   app_settings = merge(
