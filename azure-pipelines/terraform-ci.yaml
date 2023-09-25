@@ -21,7 +21,7 @@ trigger:
     - '*'
   paths:
     include:
-    - infrastructure
+    - modules
     exclude:
     - '**/README.md'
 
@@ -48,26 +48,26 @@ stages:
       - template: steps/terraform-init.yaml
         parameters:
           environment: ${{ variables.environment }}
-          workingDirectory: infrastructure
+          workingDirectory: modules
 
       # Run Terraform format
       - template: steps/terraform-format.yaml
         parameters:
-          workingDirectory: infrastructure
+          workingDirectory: modules
 
       # Run Terraform validate
       - template: steps/terraform-validate.yaml
         parameters:
-          workingDirectory: infrastructure
+          workingDirectory: modules
 
       # Run TFLint
       - template: steps/tflint-validate.yaml
         parameters:
           configFilePath: $(Build.Repository.LocalPath)/.tflint.hcl
-          workingDirectory: infrastructure
+          workingDirectory: modules
 
       # Run Checkov
       - template: steps/checkov-validate.yaml
         parameters:
           framework: terraform
-          workingDirectory: infrastructure
+          workingDirectory: modules
