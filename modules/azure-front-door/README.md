@@ -20,7 +20,7 @@ This component contains the Azure Front Door and WAF resources. The resources in
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_azure_region_uks"></a> [azure\_region\_uks](#module\_azure\_region\_uks) | claranet/regions/azurerm | 4.2.1 |
+| <a name="module_azure_region"></a> [azure\_region](#module\_azure\_region) | claranet/regions/azurerm | 5.1.0 |
 
 ## Resources
 
