@@ -15,6 +15,7 @@ This Terraform module creates an App service to deploy backend or frontend servi
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.64.0 |
 | <a name="provider_azurerm.tooling"></a> [azurerm.tooling](#provider\_azurerm.tooling) | 3.64.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | 0.9.1 |
 
 ## Modules
 
@@ -28,6 +29,8 @@ No modules.
 | [azurerm_app_service_custom_hostname_binding.custom_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/app_service_custom_hostname_binding) | resource |
 | [azurerm_key_vault_access_policy.read_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_key_vault_access_policy.read_secrets_staging_slot](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_secret.app_secret](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/key_vault_secret) | resource |
+| [azurerm_key_vault_secret.docker_registry_server_password](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/key_vault_secret) | resource |
 | [azurerm_linux_web_app.web_app](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/linux_web_app) | resource |
 | [azurerm_linux_web_app_slot.staging](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/linux_web_app_slot) | resource |
 | [azurerm_monitor_activity_log_alert.app_service_delete](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/monitor_activity_log_alert) | resource |
@@ -37,6 +40,7 @@ No modules.
 | [azurerm_monitor_metric_alert.app_service_response_time](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/monitor_metric_alert) | resource |
 | [azurerm_private_endpoint.private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.private_endpoint_staging](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/resources/private_endpoint) | resource |
+| [time_offset.secret_expire_date](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/offset) | resource |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/data-sources/client_config) | data source |
 | [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/3.64.0/docs/data-sources/container_registry) | data source |
 
