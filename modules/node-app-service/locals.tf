@@ -9,6 +9,9 @@ locals {
     }
   )
 
+  secrets_manual = [
+    var.secrets_manual
+  ]
   secrets_automated = [
     "docker-registry-server-password"
   ]
@@ -18,4 +21,6 @@ locals {
   secret_refs = {
     for name in local.secret_names : name => "@Microsoft.KeyVault(SecretUri=${var.key_vault_uri}secrets/${name}/)"
   }
+
+  tags = var.tags
 }

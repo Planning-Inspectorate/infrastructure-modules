@@ -88,6 +88,11 @@ variable "integration_subnet_id" {
   type        = string
 }
 
+variable "key_vault_uri" {
+  description = "The URI of the Key Vault"
+  type        = string
+}
+
 variable "location" {
   description = "The name of the app service location"
   type        = string
@@ -123,6 +128,11 @@ variable "resource_group_name" {
 
 variable "resource_suffix" {
   description = "The suffix for resource naming"
+  type        = string
+}
+
+variable "secrets_manual" {
+  description = "The name of the secrets manual to be added to the key vault"
   type        = string
 }
 
