@@ -2,15 +2,14 @@
 
 ## Describe your changes
 
-Issue ticket number and link
-
-Please include a summary of the change along with any relevant context.
+- Issue ticket number and link
+- Please include a summary of the change along with any relevant context.
 List any dependencies that are required for this change.
 
 ## Useful information to review or test
 
-Add any useful information that will help the reviewer test your changes.
-This could include example payloads, steps to reproduce, etc.
+- Add any useful information that will help the reviewer test your changes.
+- This could include example payloads, steps to reproduce, etc.
 
 ## Type of change 🧩
 
