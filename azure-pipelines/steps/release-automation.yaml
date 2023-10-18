@@ -18,6 +18,9 @@ stages:
     timeoutInMinutes: 15
     dependsOn: []
     steps:
+      - checkout: self
+        clean: true
+        persistCredentials: true
       - pwsh: |
           git branch
           $(Build.SourcesDirectory)\release-automation\Tag-Repo.ps1 -SourceBranch $(Build.SourceBranchName) -SourceDirectory $(Build.SourcesDirectory) -Mode "$env:MODE"
