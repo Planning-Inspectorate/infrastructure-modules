@@ -18,9 +18,6 @@ stages:
     timeoutInMinutes: 15
     dependsOn: []
     steps:
-      - checkout: self
-        clean: true
-        persistCredentials: true
       - pwsh: |
           write-host $(Build.SourceBranchName)
           git branch
