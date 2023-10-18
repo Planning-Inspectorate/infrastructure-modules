@@ -23,6 +23,8 @@ stages:
         persistCredentials: true
       - pwsh: |
           write-host $(Build.SourceBranchName)
+          git branch
+          git checkout $(Build.SourceBranchName)
           $(Build.SourcesDirectory)\release-automation\Tag-Repo.ps1 -SourceBranch $(Build.SourceBranchName) -SourceDirectory $(Build.SourcesDirectory) -Mode "$env:MODE"
         displayName: 'execute_auto_release_script'
         name: 'execute_auto_release_script'
