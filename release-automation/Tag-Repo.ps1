@@ -6,6 +6,8 @@ param (
 
 $planModeValue = "plan"
 write-host "Running in $Mode mode"
+write-host "SourceBranch: $SourceBranch"
+write-host "SourceDirectory: $SourceDirectory"
 
 # Retrieve information from taginfo.json
 $tagInfoJson = Get-Content (join-path -Path $SourceDirectory -ChildPath versioninfo.json) | ConvertFrom-Json
@@ -26,7 +28,7 @@ if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "main" ) ) {
         $commitCounter = 0        
         foreach ($commit in $commits) {
             if ($commit -like "*tag*") {
-                $matches = ($commit -match "^.*tag:\s([\d\.]*).*")
+                $match = ($commit -match "^.*tag:\s([\d\.]*).*")
                 $existingVersion = $matches[1] # get the first (and only) capture group
                 break
             }
