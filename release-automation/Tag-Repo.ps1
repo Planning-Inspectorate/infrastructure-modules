@@ -6,8 +6,6 @@ param (
 
 $planModeValue = "plan"
 write-host "Running in $Mode mode"
-write-host "SourceBranch: $SourceBranch"
-write-host "SourceDirectory: $SourceDirectory"
 
 # Retrieve information from taginfo.json
 $tagInfoJson = Get-Content (join-path -Path $SourceDirectory -ChildPath versioninfo.json) | ConvertFrom-Json
@@ -19,30 +17,25 @@ if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "main" ) ) {
     $commits = $(git --no-pager log --format="%H %D")
     # write-host "Commits: $commits"
 
-    $isLatestCommitTagged = ($commits[0] -like "*tag*") # string matches wildcard pattern
-    write-host "IsLatestCommit? $isLatestCommitTagged" # This is where the error is happening in the pipeline - stating False and then jumping to line 37. It is not picking up the latest commit and the HEAD is detached.
+    $isLatestCommitTagged = ($commits[0] -like "*tag*")
+    write-host "IsLatestCommit? $isLatestCommitTagged"
 
     if ( $isLatestCommitTagged ) {
-        write-output "Latest commit is already tagged - no work to do" # It is not the latest commit as this message would be read
-
-############ From here
+        write-output "Latest commit is already tagged - no work to do"
     } else {
         $commitCounter = 0
         foreach ($commit in $commits) {
             if ($commit -like "*tag*") {
                 $match = ($commit -match "^.*tag:\s([\d\.]*).*")
-                Write-Host ("The value match holds is " + $match)
-                $existingVersion = $match[1]# get the first (and only) capture group ////// Is this where the error is?
-                Write-Host ("The value existingVersion holds is " + $existingVersion)
-                write-host $match # Put something in here to see what is being echoed and check that this if statement is not being used
+                $existingVersion = $match[1] # get the first (and only) capture group
+                write-host $match
                 break
             }
             $commitCounter++
         }
         if (! $existingVersion) {
-            throw "There is no tagged commit on this branch. One needs to exist to derive next tag value" # can this error message be changed for the system to echo something itself?
+            throw "There is no tagged commit on this branch. One needs to exist to derive next tag value"
         }
-########## To here is where it is erroring...
 
         # Derive new version number
         write-host "ExistingVersion is $existingVersion"
@@ -79,5 +72,5 @@ if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "main" ) ) {
         }
     }
 } else {
-    write-host "No work to do - this is not a commit on a branch that should be tagged" # saying that this commmit is irrelevant because it's not on a branch that should be tagged
+    write-host "No work to do - this is not a commit on a branch that should be tagged"
 }
