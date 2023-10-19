@@ -79,5 +79,5 @@ if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "main" ) ) {
         }
     }
 } else {
-    write-host "No work to do - this is not a commit on a branch that should be tagged"
+    write-host "No work to do - this is not a commit on a branch that should be tagged" # saying that this commmit is irrelevant because it's not on a branch that should be tagged
 }

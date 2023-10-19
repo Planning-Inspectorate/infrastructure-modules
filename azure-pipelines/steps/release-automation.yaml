@@ -2,9 +2,9 @@ trigger:
   branches:
     include:
       - '*'
-  tags:
-    include:
-      - '*'
+  # tags:
+  #   include:
+  #     - '*'
 
 pool:
   vmImage: ubuntu-22.04
