@@ -26,5 +26,9 @@ module "node_app_service" {
   secrets_manual                        = var.secrets_manual
   service_name                          = var.service_name
   tags                                  = var.tags
-  tooling_subscription_id               = var.tooling_subscription_id
+
+  providers = {
+    azurerm         = azurerm
+    azurerm.tooling = azurerm.tooling
+ }
 }
