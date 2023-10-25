@@ -30,5 +30,5 @@ module "node_app_service" {
   providers = {
     azurerm         = azurerm
     azurerm.tooling = azurerm.tooling
- }
+  }
 }
