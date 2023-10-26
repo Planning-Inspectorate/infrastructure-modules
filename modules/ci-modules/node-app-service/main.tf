@@ -16,14 +16,12 @@ module "node_app_service" {
   inbound_vnet_connectivity             = var.inbound_vnet_connectivity
   integration_subnet_id                 = var.integration_subnet_id
   key_vault_id                          = var.key_vault_id
-  key_vault_uri                         = var.key_vault_uri
   location                              = var.location
   log_analytics_workspace_id            = var.log_analytics_workspace_id
   monitoring_alerts_enabled             = var.monitoring_alerts_enabled
   outbound_vnet_connectivity            = var.outbound_vnet_connectivity
   resource_group_name                   = var.resource_group_name
   resource_suffix                       = var.resource_suffix
-  secrets_manual                        = var.secrets_manual
   service_name                          = var.service_name
   tags                                  = var.tags
 
