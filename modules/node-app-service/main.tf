@@ -10,7 +10,7 @@ resource "azurerm_linux_web_app" "web_app" {
   service_plan_id               = var.app_service_plan_id
   client_certificate_enabled    = false
   https_only                    = true
-  public_network_access_enabled = false
+  public_network_access_enabled = !var.inbound_vnet_connectivity
 
   app_settings = local.app_settings
 
