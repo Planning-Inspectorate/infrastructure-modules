@@ -48,6 +48,12 @@ variable "integration_subnet_id" {
   type        = string
 }
 
+variable "key_vault_id" {
+  description = "The ID of the key vault so the App Service can pull secret values"
+  type        = string
+  default     = null
+}
+
 variable "location" {
   description = "The name of the app service location"
   type        = string

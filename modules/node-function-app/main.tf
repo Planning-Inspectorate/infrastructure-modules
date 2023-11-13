@@ -49,3 +49,17 @@ resource "azurerm_application_insights" "function_app_insights" {
   resource_group_name = var.resource_group_name
   application_type    = "web"
 }
+
+# setup key vault read access if configured
+resource "azurerm_key_vault_access_policy" "read_secrets" {
+  count = var.key_vault_id != null ? 1 : 0
+
+  key_vault_id = var.key_vault_id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_linux_function_app.function_app.identity[0].principal_id
+
+  certificate_permissions = []
+  key_permissions         = []
+  secret_permissions      = ["Get"]
+  storage_permissions     = []
+}
