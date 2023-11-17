@@ -43,6 +43,7 @@ No modules.
 | <a name="input_function_apps_storage_account"></a> [function\_apps\_storage\_account](#input\_function\_apps\_storage\_account) | The name of the storage account used by the Function Apps | `string` | n/a | yes |
 | <a name="input_function_apps_storage_account_access_key"></a> [function\_apps\_storage\_account\_access\_key](#input\_function\_apps\_storage\_account\_access\_key) | The access key for the storage account | `string` | n/a | yes |
 | <a name="input_function_node_version"></a> [function\_node\_version](#input\_function\_node\_version) | Node version for function | `number` | `14` | no |
+| <a name="input_inbound_vnet_connectivity"></a> [inbound\_vnet\_connectivity](#input\_inbound\_vnet\_connectivity) | Indicates whether inbound connectivity (Private Endpoint) is required | `bool` | `false` | no |
 | <a name="input_integration_subnet_id"></a> [integration\_subnet\_id](#input\_integration\_subnet\_id) | The id of the vnet integration subnet the app service is linked to for egress traffic | `string` | `null` | no |
 | <a name="input_key_vault_id"></a> [key\_vault\_id](#input\_key\_vault\_id) | The ID of the key vault so the App Service can pull secret values | `string` | `null` | no |
 | <a name="input_location"></a> [location](#input\_location) | The name of the app service location | `string` | n/a | yes |

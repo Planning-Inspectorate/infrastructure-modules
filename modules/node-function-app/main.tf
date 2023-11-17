@@ -6,7 +6,7 @@ resource "azurerm_linux_function_app" "function_app" {
   storage_account_name          = var.function_apps_storage_account
   storage_account_access_key    = var.function_apps_storage_account_access_key
   https_only                    = true
-  public_network_access_enabled = false
+  public_network_access_enabled = !var.inbound_vnet_connectivity
 
   app_settings = merge(
     var.app_settings,
