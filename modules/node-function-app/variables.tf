@@ -37,7 +37,7 @@ variable "function_apps_storage_account_access_key" {
 }
 
 variable "function_node_version" {
-  default     = 14
+  default     = 18
   description = "Node version for function"
   type        = number
 }
