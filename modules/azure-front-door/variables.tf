@@ -43,3 +43,8 @@ variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
 }
+
+variable "service_name" {
+  description = "The name of the service the Front Door belongs to"
+  type        = string
+}
