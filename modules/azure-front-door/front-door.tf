@@ -14,7 +14,7 @@ resource "azurerm_cdn_frontdoor_endpoint" "default" {
 resource "azurerm_cdn_frontdoor_origin_group" "default" {
   name                     = var.name
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
-  session_affinity_enabled = false
+  session_affinity_enabled = var.session_affinity_enabled
 
   load_balancing {
     sample_size                        = 4
@@ -52,11 +52,11 @@ resource "azurerm_cdn_frontdoor_route" "default" {
 
   supported_protocols    = ["Http", "Https"]
   patterns_to_match      = ["/*"]
-  forwarding_protocol    = "MatchRequest"
+  forwarding_protocol    = var.forwarding_protocol
   link_to_default_domain = true
   https_redirect_enabled = true
 
-  cdn_frontdoor_origin_path = "/government/organisations/planning-inspectorate"
+  cdn_frontdoor_origin_path = var.cdn_frontdoor_origin_path
 }
 
 resource "azurerm_cdn_frontdoor_custom_domain" "default" {

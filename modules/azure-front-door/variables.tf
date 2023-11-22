@@ -1,3 +1,8 @@
+variable "cdn_frontdoor_origin_path" {
+  description = "A directory path on the Front Door Origin that can be used to retrieve content"
+  type        = string
+}
+
 variable "common_log_analytics_workspace_id" {
   description = "The ID for the common Log Analytics Workspace"
   type        = string
@@ -6,6 +11,12 @@ variable "common_log_analytics_workspace_id" {
 variable "common_tags" {
   description = "The common resource tags for the project"
   type        = map(string)
+}
+
+variable "forwarding_protocol" {
+  description = "The forwarding protocol set for the cdn frontdoor route"
+  type        = string
+  default     = "MatchRequest"
 }
 
 variable "front_door_waf_mode" {
@@ -47,4 +58,10 @@ variable "resource_group_name" {
 variable "service_name" {
   description = "The name of the service the Front Door belongs to"
   type        = string
+}
+
+variable "session_affinity_enabled" {
+  description = "The forwarding protocol set for the cdn frontdoor route"
+  type        = bool
+  default     = false
 }
