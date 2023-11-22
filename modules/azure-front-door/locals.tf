@@ -1,5 +1,5 @@
 locals {
-  service_name = "common"
+  service_name = var.service_name
 
   tags = merge(
     var.common_tags,
