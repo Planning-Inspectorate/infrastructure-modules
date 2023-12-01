@@ -135,3 +135,9 @@ variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)
 }
+
+variable "health_check_path" {
+  description = "The path of the service's health check endpoint"
+  type        = string
+  default     = null
+}
