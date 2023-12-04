@@ -12,6 +12,7 @@ module "node_app_service" {
   custom_hostname                       = var.custom_hostname
   custom_hostname_certificate_secret_id = var.custom_hostname_certificate_secret_id
   endpoint_subnet_id                    = var.endpoint_subnet_id
+  health_check_path                     = var.health_check_path
   image_name                            = var.image_name
   inbound_vnet_connectivity             = var.inbound_vnet_connectivity
   integration_subnet_id                 = var.integration_subnet_id

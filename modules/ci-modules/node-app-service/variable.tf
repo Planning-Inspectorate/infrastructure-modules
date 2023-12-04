@@ -66,6 +66,12 @@ variable "front_door_restriction" {
   default     = false
 }
 
+variable "health_check_path" {
+  description = "The path of the service's health check endpoint"
+  type        = string
+  default     = null
+}
+
 variable "image_name" {
   description = "The name of the image deployed to the App Service"
   type        = string
@@ -82,6 +88,13 @@ variable "integration_subnet_id" {
   description = "The id of the vnet integration subnet the app service is linked to for egress traffic"
   type        = string
 }
+
+variable "key_vault_id" {
+  description = "The ID of the key vault so the App Service can pull secret values"
+  type        = string
+  default     = null
+}
+
 variable "location" {
   description = "The name of the app service location"
   type        = string
@@ -96,12 +109,6 @@ variable "monitoring_alerts_enabled" {
   default     = false
   description = "Indicates whether Azure Monitor alerts are enabled for App Service"
   type        = bool
-}
-
-variable "key_vault_id" {
-  description = "The ID of the key vault so the App Service can pull secret values"
-  type        = string
-  default     = null
 }
 
 variable "outbound_vnet_connectivity" {
