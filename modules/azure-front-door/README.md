@@ -43,6 +43,7 @@ This component contains the Azure Front Door and WAF resources. The resources in
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cdn_frontdoor_origin_path"></a> [cdn\_frontdoor\_origin\_path](#input\_cdn\_frontdoor\_origin\_path) | A directory path on the Front Door Origin that can be used to retrieve content | `string` | n/a | yes |
+| <a name="input_certificate_name_check_enabled"></a> [certificate\_name\_check\_enabled](#input\_certificate\_name\_check\_enabled) | Specifies whether certificate name checks are enabled for this origin | `bool` | `false` | no |
 | <a name="input_common_log_analytics_workspace_id"></a> [common\_log\_analytics\_workspace\_id](#input\_common\_log\_analytics\_workspace\_id) | The ID for the common Log Analytics Workspace | `string` | n/a | yes |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | The common resource tags for the project | `map(string)` | n/a | yes |
 | <a name="input_forwarding_protocol"></a> [forwarding\_protocol](#input\_forwarding\_protocol) | The forwarding protocol set for the cdn frontdoor route | `string` | `"MatchRequest"` | no |

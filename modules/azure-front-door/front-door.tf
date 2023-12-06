@@ -41,7 +41,7 @@ resource "azurerm_cdn_frontdoor_origin" "default" {
   origin_host_header             = var.host_name
   priority                       = 5
   weight                         = 100
-  certificate_name_check_enabled = true
+  certificate_name_check_enabled = var.certificate_name_check_enabled
 }
 
 resource "azurerm_cdn_frontdoor_route" "default" {
