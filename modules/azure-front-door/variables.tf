@@ -35,6 +35,12 @@ variable "front_door_sku_name" {
   }
 }
 
+variable "link_to_default_domain" {
+  description = "Setting to select if this Front Door Route be linked to the default endpoint"
+  type        = bool
+  default     = true
+}
+
 variable "location" {
   description = "The location resources are deployed to in slug format e.g. 'uk-west'"
   type        = string
@@ -48,6 +54,12 @@ variable "name" {
 variable "host_name" {
   description = "The host name of the resource"
   type        = string
+}
+
+variable "https_redirect_enabled" {
+  description = "Setting to select if this Front Door Route should automatically redirect HTTP traffic to HTTPS traffic"
+  type        = bool
+  default     = true
 }
 
 variable "resource_group_name" {

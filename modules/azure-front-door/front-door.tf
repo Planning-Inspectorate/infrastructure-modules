@@ -53,8 +53,8 @@ resource "azurerm_cdn_frontdoor_route" "default" {
   supported_protocols    = ["Http", "Https"]
   patterns_to_match      = ["/*"]
   forwarding_protocol    = var.forwarding_protocol
-  link_to_default_domain = true
-  https_redirect_enabled = true
+  link_to_default_domain = var.link_to_default_domain
+  https_redirect_enabled = var.https_redirect_enabled
 
   cdn_frontdoor_origin_path = var.cdn_frontdoor_origin_path
 }
