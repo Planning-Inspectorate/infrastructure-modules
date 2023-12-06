@@ -1,5 +1,5 @@
 module "node_app_service" {
-  source = "../../modules/node-function-app"
+  source = "../"
 
   action_group_low_id                      = var.action_group_low_id
   app_name                                 = var.app_name

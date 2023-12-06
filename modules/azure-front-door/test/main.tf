@@ -1,5 +1,5 @@
 module "azure_front_door" {
-  source = "../../azure-front-door"
+  source = "../"
 
   cdn_frontdoor_origin_path         = var.cdn_frontdoor_origin_path
   common_tags                       = var.common_tags
