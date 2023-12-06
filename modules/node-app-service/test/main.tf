@@ -1,5 +1,5 @@
 module "node_app_service" {
-  source = "../../modules/node-app-service"
+  source = "../"
 
   action_group_low_id                   = var.action_group_low_id
   app_name                              = var.app_name
@@ -12,6 +12,7 @@ module "node_app_service" {
   custom_hostname                       = var.custom_hostname
   custom_hostname_certificate_secret_id = var.custom_hostname_certificate_secret_id
   endpoint_subnet_id                    = var.endpoint_subnet_id
+  health_check_path                     = var.health_check_path
   image_name                            = var.image_name
   inbound_vnet_connectivity             = var.inbound_vnet_connectivity
   integration_subnet_id                 = var.integration_subnet_id
