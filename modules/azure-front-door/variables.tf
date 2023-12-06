@@ -3,6 +3,12 @@ variable "cdn_frontdoor_origin_path" {
   type        = string
 }
 
+variable "certificate_name_check_enabled" {
+  description = "Specifies whether certificate name checks are enabled for this origin"
+  type        = bool
+  default     = false
+}
+
 variable "common_log_analytics_workspace_id" {
   description = "The ID for the common Log Analytics Workspace"
   type        = string
