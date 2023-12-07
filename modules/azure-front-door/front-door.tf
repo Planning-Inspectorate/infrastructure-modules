@@ -2,6 +2,8 @@ resource "azurerm_cdn_frontdoor_profile" "default" {
   name                = var.name
   resource_group_name = var.resource_group_name
   sku_name            = var.front_door_sku_name
+
+  tags = local.tags
 }
 
 resource "azurerm_cdn_frontdoor_endpoint" "default" {
