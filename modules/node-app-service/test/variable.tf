@@ -66,6 +66,12 @@ variable "front_door_restriction" {
   default     = false
 }
 
+variable "health_check_path" {
+  description = "The path of the service's health check endpoint"
+  type        = string
+  default     = null
+}
+
 variable "image_name" {
   description = "The name of the image deployed to the App Service"
   type        = string
