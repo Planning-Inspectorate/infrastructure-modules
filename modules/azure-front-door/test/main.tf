@@ -8,4 +8,8 @@ module "azure_front_door" {
   host_name                         = var.host_name
   resource_group_name               = var.resource_group_name
   service_name                      = var.service_name
+
+  providers = {
+    azurerm = azurerm
+  }
 }
