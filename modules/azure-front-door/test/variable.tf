@@ -31,3 +31,8 @@ variable "service_name" {
   description = "The name of the service the Front Door belongs to"
   type        = string
 }
+
+variable "tooling_subscription_id" {
+  description = "The ID for the Tooling subscription that houses the Container Registry"
+  type        = string
+}

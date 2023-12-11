@@ -10,6 +10,7 @@ module "azure_front_door" {
   service_name                      = var.service_name
 
   providers = {
-    azurerm = azurerm
+    azurerm         = azurerm
+    azurerm.tooling = azurerm.tooling
   }
 }
