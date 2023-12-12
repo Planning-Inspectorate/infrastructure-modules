@@ -13,12 +13,13 @@ variable "common_tags" {
   type        = map(string)
 }
 
-variable "name" {
-  description = "The name of the resource"
-  type        = string
-}
 variable "host_name" {
   description = "The host name of the resource"
+  type        = string
+}
+
+variable "name" {
+  description = "The name of the resource"
   type        = string
 }
 
