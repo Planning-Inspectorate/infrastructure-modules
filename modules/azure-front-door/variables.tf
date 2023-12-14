@@ -85,7 +85,6 @@ variable "session_affinity_enabled" {
   default     = false
 }
 
-
 variable "endpoints" {
   description = "CDN FrontDoor Endpoints configurations."
   type = map(object({
@@ -106,7 +105,6 @@ variable "endpoints" {
   }))
   default = {}
 }
-
 
 variable "origin_groups" {
   description = "CDN FrontDoor Origin Groups configurations."

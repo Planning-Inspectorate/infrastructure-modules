@@ -24,9 +24,12 @@ variable "name" {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> refactored front door to enable use of for_each
+=======
+>>>>>>> removed whitespacing and duplicate variable
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
@@ -64,7 +67,6 @@ variable "endpoints" {
   }))
   default = {}
 }
-
 
 variable "origin_groups" {
   description = "CDN FrontDoor Origin Groups configurations."
