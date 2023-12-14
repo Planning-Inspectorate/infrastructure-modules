@@ -22,14 +22,6 @@ variable "name" {
   description = "The name of the resource"
   type        = string
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> refactored front door to enable use of for_each
-=======
->>>>>>> removed whitespacing and duplicate variable
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
@@ -44,8 +36,6 @@ variable "tooling_subscription_id" {
   description = "The ID for the Tooling subscription that houses the Container Registry"
   type        = string
 }
-
-
 
 variable "endpoints" {
   description = "CDN FrontDoor Endpoints configurations."
