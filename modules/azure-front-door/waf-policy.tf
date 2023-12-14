@@ -19,7 +19,7 @@ resource "azurerm_cdn_frontdoor_security_policy" "default" {
 
       association {
         domain {
-          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_custom_domain.default.id
+          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_custom_domain.default[0].id
         }
         patterns_to_match = ["/*"]
       }
