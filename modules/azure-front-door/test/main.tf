@@ -6,7 +6,6 @@ module "azure_front_door" {
   common_log_analytics_workspace_id = var.common_log_analytics_workspace_id
   custom_domain                     = var.custom_domain
   endpoints                         = var.endpoints
-  host_name                         = var.host_name
   name                              = var.name
   origins                           = var.origins
   origin_groups                     = var.origin_groups
