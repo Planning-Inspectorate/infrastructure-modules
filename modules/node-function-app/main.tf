@@ -9,8 +9,8 @@ resource "azurerm_linux_function_app" "function_app" {
   public_network_access_enabled = !var.inbound_vnet_connectivity
 
   app_settings = merge(
-    var.app_settings,
-    local.app_settings
+    local.app_settings,
+    var.app_settings # passed in settings take precedence
   )
 
   dynamic "connection_string" {
