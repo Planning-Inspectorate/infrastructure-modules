@@ -29,12 +29,8 @@ if ( ($SourceBranch -match "^[\d]*\.x$") -or ($SourceBranch -eq "main" ) ) {
     } else {
         $commitCounter = 0
         foreach ($commit in $commits) {
-            if ($commit -like "*tag*") {
-                $match = ($commit -match "^.*tag:\s([\d\.]*).*")
-                Write-Host ("The value match holds is " + $match)
-                $existingVersion = $match[1]# get the first (and only) capture group ////// Is this where the error is?
-                Write-Host ("The value existingVersion holds is " + $existingVersion)
-                write-host $match # Put something in here to see what is being echoed and check that this if statement is not being used
+            if ($commit -match "^.*tag:\s(?<tag>[\d\.]*).*") {
+                $existingVersion = $Matches.tag # matches contains last match values
                 break
             }
             $commitCounter++
