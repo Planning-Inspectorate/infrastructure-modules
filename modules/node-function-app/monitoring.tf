@@ -39,8 +39,7 @@ resource "azurerm_monitor_metric_alert" "function_app_http_5xx" {
   }
 
   action {
-    action_group_id    = var.action_group_low_id
-    webhook_properties = {}
+    action_group_id = var.action_group_ids.tech
   }
 }
 
@@ -64,8 +63,7 @@ resource "azurerm_monitor_metric_alert" "function_app_response_time" {
   }
 
   action {
-    action_group_id    = var.action_group_low_id
-    webhook_properties = {}
+    action_group_id = var.action_group_ids.tech
   }
 }
 
@@ -84,8 +82,19 @@ resource "azurerm_monitor_activity_log_alert" "function_app_stop" {
   }
 
   action {
-    action_group_id    = var.action_group_low_id
-    webhook_properties = {}
+    action_group_id = var.action_group_ids.tech
+  }
+
+  action {
+    action_group_id = var.action_group_ids.service_manager
+  }
+
+  action {
+    action_group_id = var.action_group_ids.its
+  }
+
+  action {
+    action_group_id = var.action_group_ids.iap
   }
 }
 
@@ -104,7 +113,18 @@ resource "azurerm_monitor_activity_log_alert" "function_app_delete" {
   }
 
   action {
-    action_group_id    = var.action_group_low_id
-    webhook_properties = {}
+    action_group_id = var.action_group_ids.tech
+  }
+
+  action {
+    action_group_id = var.action_group_ids.service_manager
+  }
+
+  action {
+    action_group_id = var.action_group_ids.its
+  }
+
+  action {
+    action_group_id = var.action_group_ids.iap
   }
 }

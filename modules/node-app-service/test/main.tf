@@ -1,7 +1,7 @@
 module "node_app_service" {
   source = "../"
 
-  action_group_low_id                   = var.action_group_low_id
+  action_group_ids                      = var.action_group_ids
   app_name                              = var.app_name
   app_service_plan_id                   = var.app_service_plan_id
   app_service_plan_resource_group_name  = var.app_service_plan_resource_group_name
