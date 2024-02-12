@@ -33,7 +33,7 @@ variable "profile" {
   type = map(object({
     name                = string
     resource_group_name = string
-    sku_name            = string
+    sku_name            = optional(string, Premium_AzureFrontDoor)
 
     tags = optional(map(string))
   }))
