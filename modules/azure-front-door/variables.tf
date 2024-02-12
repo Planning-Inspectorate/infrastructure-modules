@@ -50,6 +50,17 @@ variable "service_name" {
   type        = string
 }
 
+variable "profile" {
+  description = "CDN FrontDoor Endpoints configurations."
+  type = map(object({
+    name                = string
+    resource_group_name = string
+    sku_name            = string
+
+    tags = string
+  }))
+}
+
 variable "endpoints" {
   description = "CDN FrontDoor Endpoints configurations."
   type = map(object({
