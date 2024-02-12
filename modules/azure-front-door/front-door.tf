@@ -1,9 +1,10 @@
 resource "azurerm_cdn_frontdoor_profile" "default" {
-  name                = var.name
-  resource_group_name = var.resource_group_name
-  sku_name            = var.front_door_sku_name
+  for_each            = var.profile
+  name                = each.key
+  resource_group_name = each.value.resource_group_name
+  sku_name            = each.value.sku_name
 
-  tags = local.tags
+  tags = each.value.tags
 }
 
 resource "azurerm_cdn_frontdoor_endpoint" "default" {
