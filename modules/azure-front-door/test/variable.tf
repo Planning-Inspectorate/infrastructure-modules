@@ -22,6 +22,12 @@ variable "name" {
   description = "The name of the resource"
   type        = string
 }
+
+variable "profile" {
+  description = "The profile set up for the resource Azure Front Door"
+  type        = string
+}
+
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
