@@ -9,6 +9,7 @@ module "azure_front_door" {
   name                              = var.name
   origins                           = var.origins
   origin_groups                     = var.origin_groups
+  profile                           = var.profile
   resource_group_name               = var.resource_group_name
   routes                            = var.routes
   service_name                      = var.service_name
