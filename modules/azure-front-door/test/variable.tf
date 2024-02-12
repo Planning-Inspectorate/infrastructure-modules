@@ -23,9 +23,20 @@ variable "name" {
   type        = string
 }
 
+# variable "profile" {
+#   description = "The profile set up for the resource Azure Front Door"
+#   type        = string
+# }
+
 variable "profile" {
-  description = "The profile set up for the resource Azure Front Door"
-  type        = string
+  description = "CDN FrontDoor Profile configurations."
+  type = map(object({
+    name                = string
+    resource_group_name = string
+    sku_name            = string
+
+    tags = optional(map(string))
+  }))
 }
 
 variable "resource_group_name" {
