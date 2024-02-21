@@ -27,7 +27,7 @@ resource "azurerm_monitor_metric_alert" "app_service_http_5xx" {
   description         = "Sends an alert when the App Service returns excess 5xx respones"
   window_size         = "PT5M"
   frequency           = "PT1M"
-  severity            = 4
+  severity            = 3
   tags                = var.tags
 
   criteria {
@@ -51,7 +51,7 @@ resource "azurerm_monitor_metric_alert" "app_service_response_time" {
   description         = "Sends an alert when the App Service response exceeds 1 minute"
   window_size         = "PT5M"
   frequency           = "PT1M"
-  severity            = 4
+  severity            = 3
   tags                = var.tags
 
   criteria {
