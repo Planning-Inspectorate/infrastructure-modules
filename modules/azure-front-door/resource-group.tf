@@ -1,11 +1,11 @@
 resource "azurerm_resource_group" "frontdoor" {
-  name     = var.resource_group_name
-  location = module.azure_region.location
+  name     = "pins-rg-front-door-${var.environment}-${module.azure_region_uks.location_short}"
+  location = module.azure_region_uks.location
 
   tags = merge(
     local.tags,
     {
-      Region = module.azure_region.location
+      Region = module.azure_region_uks.location
     }
   )
 }
