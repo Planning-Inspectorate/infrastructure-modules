@@ -8,6 +8,8 @@ module "azure_front_door" {
   location          = var.location
   name              = var.name
   sku_name          = var.sku_name
+  origin            = var.origin
+  route             = var.route
 
 
   providers = {

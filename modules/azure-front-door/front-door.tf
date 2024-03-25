@@ -33,26 +33,33 @@ resource "azurerm_cdn_frontdoor_origin_group" "default" {
 }
 
 resource "azurerm_cdn_frontdoor_origin" "default" {
-  name                          = var.name
-  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default.id
+  for_each                      = var.origin
+  name                          = each.key
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default[each.key].id
 
-  enabled                        = true
+  enabled                        = each.value.enabled
   host_name                      = var.frontend_endpoint
+  http_port                      = each.value.http_port
+  https_port                     = each.value.https_port
   origin_host_header             = var.frontend_endpoint
-  certificate_name_check_enabled = true
+  priority                       = each.value.priority
+  weight                         = each.value.weight
+  certificate_name_check_enabled = each.value.certificate_name_check_enabled
 }
 
 resource "azurerm_cdn_frontdoor_route" "default" {
-  name                          = var.name
-  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.default.id
-  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default.id
-  cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.default.id]
+  for_each                      = var.route
+  name                          = each.key
+  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.default[each.key].id
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default[each.key].id
+  cdn_frontdoor_origin_ids      = [azurerm_cdn_frontdoor_origin.default[each.key].id]
 
-  forwarding_protocol = "MatchRequest"
-  patterns_to_match   = ["/*"]
-  supported_protocols = ["Https"]
+  forwarding_protocol = each.value.forwarding_protocol
+  patterns_to_match   = each.value.patterns_to_match
+  supported_protocols = each.value.forwarding_protocol
 
-  cdn_frontdoor_custom_domain_ids = [azurerm_cdn_frontdoor_custom_domain.default.id]
+  https_redirect_enabled = each.value.https_redirect_enabled
+  link_to_default_domain = each.value.link_to_default_domain
 }
 
 resource "azurerm_cdn_frontdoor_custom_domain" "default" {
@@ -69,5 +76,5 @@ resource "azurerm_cdn_frontdoor_custom_domain" "default" {
 
 resource "azurerm_cdn_frontdoor_custom_domain_association" "default" {
   cdn_frontdoor_custom_domain_id = azurerm_cdn_frontdoor_custom_domain.default.id
-  cdn_frontdoor_route_ids        = [azurerm_cdn_frontdoor_route.default.id]
+  cdn_frontdoor_route_ids        = [azurerm_cdn_frontdoor_route.default[0].id]
 }
