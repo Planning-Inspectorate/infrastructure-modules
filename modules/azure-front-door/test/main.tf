@@ -1,18 +1,16 @@
 module "azure_front_door" {
   source = "../"
 
-  cdn_frontdoor_origin_path         = var.cdn_frontdoor_origin_path
-  common_tags                       = var.common_tags
-  common_log_analytics_workspace_id = var.common_log_analytics_workspace_id
-  custom_domain                     = var.custom_domain
-  endpoints                         = var.endpoints
-  name                              = var.name
-  origins                           = var.origins
-  origin_groups                     = var.origin_groups
-  profile                           = var.profile
-  resource_group_name               = var.resource_group_name
-  routes                            = var.routes
-  service_name                      = var.service_name
+  domain_name       = var.domain_name
+  common_tags       = var.common_tags
+  environment       = var.environment
+  frontend_endpoint = var.frontend_endpoint
+  location          = var.location
+  name              = var.name
+  sku_name          = var.sku_name
+  origin            = var.origin
+  route             = var.route
+
 
   providers = {
     azurerm         = azurerm

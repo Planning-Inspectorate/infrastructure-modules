@@ -14,19 +14,20 @@ This component contains the Azure Front Door and WAF resources. The resources in
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.83.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.96.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_azure_region"></a> [azure\_region](#module\_azure\_region) | claranet/regions/azurerm | 5.1.0 |
+| <a name="module_azure_region_uks"></a> [azure\_region\_uks](#module\_azure\_region\_uks) | claranet/regions/azurerm | 5.1.0 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
 | [azurerm_cdn_frontdoor_custom_domain.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_custom_domain) | resource |
+| [azurerm_cdn_frontdoor_custom_domain_association.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_custom_domain_association) | resource |
 | [azurerm_cdn_frontdoor_endpoint.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_endpoint) | resource |
 | [azurerm_cdn_frontdoor_firewall_policy.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_firewall_policy) | resource |
 | [azurerm_cdn_frontdoor_origin.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_origin) | resource |
@@ -35,31 +36,27 @@ This component contains the Azure Front Door and WAF resources. The resources in
 | [azurerm_cdn_frontdoor_route.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_route) | resource |
 | [azurerm_cdn_frontdoor_rule_set.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_rule_set) | resource |
 | [azurerm_cdn_frontdoor_security_policy.default](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/cdn_frontdoor_security_policy) | resource |
-| [azurerm_monitor_diagnostic_setting.front_door_waf](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_log_analytics_workspace.frontdoor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/log_analytics_workspace) | resource |
+| [azurerm_monitor_diagnostic_setting.frontdoor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
 | [azurerm_resource_group.frontdoor](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cdn_frontdoor_origin_path"></a> [cdn\_frontdoor\_origin\_path](#input\_cdn\_frontdoor\_origin\_path) | A directory path on the Front Door Origin that can be used to retrieve content | `string` | n/a | yes |
-| <a name="input_common_log_analytics_workspace_id"></a> [common\_log\_analytics\_workspace\_id](#input\_common\_log\_analytics\_workspace\_id) | The ID for the common Log Analytics Workspace | `string` | n/a | yes |
 | <a name="input_common_tags"></a> [common\_tags](#input\_common\_tags) | The common resource tags for the project | `map(string)` | n/a | yes |
-| <a name="input_custom_domain"></a> [custom\_domain](#input\_custom\_domain) | Front Door Custom Domains | <pre>map(object({<br>    name        = string<br>    host_name   = string<br>    dns_zone_id = optional(string)<br><br>    tls = optional(object({<br>      certificate_type    = optional(string, "ManagedCertificate")<br>      minimum_tls_version = optional(string, "TLS12")<br>    }))<br>  }))</pre> | n/a | yes |
-| <a name="input_endpoints"></a> [endpoints](#input\_endpoints) | CDN FrontDoor Endpoints configurations. | <pre>map(object({<br>    name                     = string<br>    origin_group_name        = optional(string)<br>    prefix                   = optional(string)<br>    custom_resource_name     = optional(string)<br>    session_affinity_enabled = optional(bool, true)<br>    forwarding_protocol      = optional(string)<br>    patterns_to_match        = optional(map(string))<br>    accepted_protocols       = optional(map(string))<br>    origin_path              = optional(string)<br>    https_redirect_enabled   = optional(bool)<br>    link_to_default_domain   = optional(bool)<br>    custom_domains           = optional(list(string))<br><br>    tags = optional(map(string))<br>  }))</pre> | `{}` | no |
-| <a name="input_front_door_sku_name"></a> [front\_door\_sku\_name](#input\_front\_door\_sku\_name) | The SKU name of the Front Door | `string` | `"Premium_AzureFrontDoor"` | no |
-| <a name="input_front_door_waf_mode"></a> [front\_door\_waf\_mode](#input\_front\_door\_waf\_mode) | Indicates if the Web Application Firewall should be in Detection or Prevention mode | `string` | `"Detection"` | no |
-| <a name="input_location"></a> [location](#input\_location) | The location resources are deployed to in slug format e.g. 'uk-west' | `string` | `"uk-south"` | no |
-| <a name="input_name"></a> [name](#input\_name) | The name of the resource | `string` | n/a | yes |
-| <a name="input_origin_groups"></a> [origin\_groups](#input\_origin\_groups) | CDN FrontDoor Origin Groups configurations. | <pre>map(object({<br>    name                                                      = string<br>    custom_resource_name                                      = optional(string)<br>    session_affinity_enabled                                  = optional(bool, false)<br>    restore_traffic_time_to_healed_or_new_endpoint_in_minutes = optional(number, 10)<br>    load_balancing = optional(object({<br>      sample_size                        = optional(number, 4)<br>      successful_samples_required        = optional(number, 2)<br>      additional_latency_in_milliseconds = optional(number, 0)<br>    }), {})<br>    health_probe = optional(object({<br>      path                = optional(string, "/")<br>      protocol            = optional(string, "Http")<br>      request_type        = optional(string, "GET")<br>      interval_in_seconds = optional(number, 120)<br>    }))<br>  }))</pre> | `{}` | no |
-| <a name="input_origins"></a> [origins](#input\_origins) | CDN FrontDoor Origins configurations. | <pre>map(object({<br>    name                           = string<br>    custom_resource_name           = optional(string)<br>    origin_group_name              = string<br>    enabled                        = optional(bool, true)<br>    certificate_name_check_enabled = optional(bool, false)<br><br>    host_name          = string<br>    http_port          = optional(number, 80)<br>    https_port         = optional(number, 443)<br>    origin_host_header = optional(string)<br>    priority           = optional(number, 5)<br>    weight             = optional(number, 100)<br><br>    private_link = optional(object({<br>      request_message        = optional(string)<br>      target_type            = optional(string)<br>      location               = string<br>      private_link_target_id = string<br>    }))<br>  }))</pre> | `{}` | no |
-| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group | `string` | n/a | yes |
-| <a name="input_routes"></a> [routes](#input\_routes) | CDN FrontDoor Routes configurations. | <pre>map(object({<br>    name                 = string<br>    custom_resource_name = optional(string)<br>    enabled              = optional(bool, true)<br><br>    endpoint_name     = string<br>    origin_group_name = string<br>    origins_names     = list(string)<br><br>    forwarding_protocol = optional(string, "MatchRequest")<br>    patterns_to_match   = optional(list(string), ["/*"])<br>    supported_protocols = optional(list(string), ["Http", "Https"])<br>    cache = optional(object({<br>      query_string_caching_behavior = optional(string, "IgnoreQueryString")<br>      query_strings                 = optional(list(string))<br>      compression_enabled           = optional(bool, false)<br>      content_types_to_compress     = optional(list(string))<br>    }))<br><br>    custom_domains_names = optional(list(string), [])<br>    origin_path          = optional(string, "/")<br>    rule_sets_names      = optional(list(string), [])<br><br>    https_redirect_enabled = optional(bool, true)<br>    link_to_default_domain = optional(bool, true)<br>  }))</pre> | n/a | yes |
-| <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service the Front Door belongs to | `string` | n/a | yes |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | Public domain name | `string` | n/a | yes |
+| <a name="input_environment"></a> [environment](#input\_environment) | Environment Name | `string` | n/a | yes |
+| <a name="input_frontend_endpoint"></a> [frontend\_endpoint](#input\_frontend\_endpoint) | The endpoint for the frontend | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | The location the App Services are deployed to in slug format e.g. 'uk-south' | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | The name of the resource. | `string` | n/a | yes |
+| <a name="input_origin"></a> [origin](#input\_origin) | CDN FrontDoor Origins configurations. | <pre>map(object({<br>    name                           = string<br>    custom_resource_name           = optional(string)<br>    origin_group_name              = string<br>    enabled                        = optional(bool, true)<br>    certificate_name_check_enabled = optional(bool, true)<br><br>    host_name          = string<br>    http_port          = optional(number, 80)<br>    https_port         = optional(number, 443)<br>    origin_host_header = optional(string)<br>    priority           = optional(number, 5)<br>    weight             = optional(number, 100)<br><br>    private_link = optional(object({<br>      request_message        = optional(string)<br>      target_type            = optional(string)<br>      location               = string<br>      private_link_target_id = string<br>    }))<br>  }))</pre> | `{}` | no |
+| <a name="input_route"></a> [route](#input\_route) | CDN FrontDoor Routes configurations. | <pre>map(object({<br>    name                 = string<br>    custom_resource_name = optional(string)<br>    enabled              = optional(bool, true)<br><br>    endpoint_name     = string<br>    origin_group_name = string<br>    origins_names     = list(string)<br><br>    forwarding_protocol = optional(string, "MatchRequest")<br>    patterns_to_match   = optional(list(string), ["/*"])<br>    supported_protocols = optional(list(string), ["Https"])<br>    cache = optional(object({<br>      query_string_caching_behavior = optional(string, "IgnoreQueryString")<br>      query_strings                 = optional(list(string))<br>      compression_enabled           = optional(bool, false)<br>      content_types_to_compress     = optional(list(string))<br>    }))<br><br>    custom_domains_names = optional(list(string), [])<br>    origin_path          = optional(string)<br>    rule_sets_names      = optional(list(string), [])<br><br>    https_redirect_enabled = optional(bool, true)<br>    link_to_default_domain = optional(bool, true)<br>  }))</pre> | n/a | yes |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | Specifies the SKU for this Front Door Profile. | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_frontend_endpoints"></a> [frontend\_endpoints](#output\_frontend\_endpoints) | A map of frontend endpoints within the Front Door instance |
+| <a name="output_front_door_profile_id"></a> [front\_door\_profile\_id](#output\_front\_door\_profile\_id) | ID of the Azure Front Door Profile |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

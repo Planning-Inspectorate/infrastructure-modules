@@ -1,110 +1,46 @@
-variable "cdn_frontdoor_origin_path" {
-  description = "A directory path on the Front Door Origin that can be used to retrieve content"
-  type        = string
-}
-
-variable "common_log_analytics_workspace_id" {
-  description = "The ID for the common Log Analytics Workspace"
-  type        = string
-}
-
 variable "common_tags" {
   description = "The common resource tags for the project"
   type        = map(string)
 }
 
-variable "host_name" {
-  description = "The host name of the resource"
+variable "domain_name" {
+  description = "Public domain name"
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment Name"
+  type        = string
+}
+
+variable "frontend_endpoint" {
+  description = "The endpoint for the frontend"
+  type        = string
+}
+
+variable "location" {
+  description = "The location the App Services are deployed to in slug format e.g. 'uk-south'"
   type        = string
 }
 
 variable "name" {
-  description = "The name of the resource"
+  description = "The name of the resource."
   type        = string
 }
 
-# variable "profile" {
-#   description = "The profile set up for the resource Azure Front Door"
-#   type        = string
-# }
-
-variable "profile" {
-  description = "CDN FrontDoor Profile configurations."
-  type = map(object({
-    name                = string
-    resource_group_name = string
-    sku_name            = optional(string, Premium_AzureFrontDoor)
-
-    tags = optional(map(string))
-  }))
-}
-
-variable "resource_group_name" {
-  description = "The name of the resource group"
+variable "sku_name" {
+  description = "Specifies the SKU for this Front Door Profile."
   type        = string
 }
 
-variable "service_name" {
-  description = "The name of the service the Front Door belongs to"
-  type        = string
-}
-
-variable "tooling_subscription_id" {
-  description = "The ID for the Tooling subscription that houses the Container Registry"
-  type        = string
-}
-
-variable "endpoints" {
-  description = "CDN FrontDoor Endpoints configurations."
-  type = map(object({
-    name                     = string
-    origin_group_name        = optional(string)
-    prefix                   = optional(string)
-    custom_resource_name     = optional(string)
-    session_affinity_enabled = optional(bool, true)
-    forwarding_protocol      = optional(string)
-    patterns_to_match        = optional(map(string))
-    accepted_protocols       = optional(map(string))
-    origin_path              = optional(string)
-    https_redirect_enabled   = optional(bool)
-    link_to_default_domain   = optional(bool)
-    custom_domains           = optional(list(string))
-
-    tags = optional(map(string))
-  }))
-  default = {}
-}
-
-variable "origin_groups" {
-  description = "CDN FrontDoor Origin Groups configurations."
-  type = map(object({
-    name                                                      = string
-    custom_resource_name                                      = optional(string)
-    session_affinity_enabled                                  = optional(bool, false)
-    restore_traffic_time_to_healed_or_new_endpoint_in_minutes = optional(number, 10)
-    load_balancing = optional(object({
-      sample_size                        = optional(number, 4)
-      successful_samples_required        = optional(number, 2)
-      additional_latency_in_milliseconds = optional(number, 0)
-    }), {})
-    health_probe = optional(object({
-      path                = optional(string, "/")
-      protocol            = optional(string, "Http")
-      request_type        = optional(string, "GET")
-      interval_in_seconds = optional(number, 120)
-    }))
-  }))
-  default = {}
-}
-
-variable "origins" {
+variable "origin" {
   description = "CDN FrontDoor Origins configurations."
   type = map(object({
     name                           = string
     custom_resource_name           = optional(string)
     origin_group_name              = string
     enabled                        = optional(bool, true)
-    certificate_name_check_enabled = optional(bool, false)
+    certificate_name_check_enabled = optional(bool, true)
 
     host_name          = string
     http_port          = optional(number, 80)
@@ -123,7 +59,7 @@ variable "origins" {
   default = {}
 }
 
-variable "routes" {
+variable "route" {
   description = "CDN FrontDoor Routes configurations."
   type = map(object({
     name                 = string
@@ -136,7 +72,7 @@ variable "routes" {
 
     forwarding_protocol = optional(string, "MatchRequest")
     patterns_to_match   = optional(list(string), ["/*"])
-    supported_protocols = optional(list(string), ["Http", "Https"])
+    supported_protocols = optional(list(string), ["Https"])
     cache = optional(object({
       query_string_caching_behavior = optional(string, "IgnoreQueryString")
       query_strings                 = optional(list(string))
@@ -145,24 +81,10 @@ variable "routes" {
     }))
 
     custom_domains_names = optional(list(string), [])
-    origin_path          = optional(string, "/")
+    origin_path          = optional(string)
     rule_sets_names      = optional(list(string), [])
 
     https_redirect_enabled = optional(bool, true)
     link_to_default_domain = optional(bool, true)
-  }))
-}
-
-variable "custom_domain" {
-  description = "Front Door Custom Domains"
-  type = map(object({
-    name        = string
-    host_name   = string
-    dns_zone_id = optional(string)
-
-    tls = optional(object({
-      certificate_type    = optional(string, "ManagedCertificate")
-      minimum_tls_version = optional(string, "TLS12")
-    }))
   }))
 }

@@ -1,63 +1,54 @@
 resource "azurerm_cdn_frontdoor_profile" "default" {
-  for_each            = var.profile
-  name                = each.key
-  resource_group_name = each.value.resource_group_name
-  sku_name            = each.value.sku_name
+  name                = var.name
+  resource_group_name = azurerm_resource_group.frontdoor.name
+  sku_name            = var.sku_name
 
-  tags = each.value.tags
+  tags = local.tags
 }
 
 resource "azurerm_cdn_frontdoor_endpoint" "default" {
-  for_each                 = var.endpoints
-  name                     = each.key
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default[each.key].id
+  name                     = var.name
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
 
-  tags = each.value.tags
+  tags = local.tags
 }
 
 resource "azurerm_cdn_frontdoor_origin_group" "default" {
-  for_each                 = var.origin_groups
-  name                     = each.key
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default[each.key].id
-  session_affinity_enabled = each.value.session_affinity_enabled
+  name                     = var.name
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
+  session_affinity_enabled = false
 
-  dynamic "load_balancing" {
-    for_each = each.value.load_balancing == null ? [] : ["enabled"]
-    content {
-      sample_size                        = each.value.sample_size
-      successful_samples_required        = each.value.successful_samples_required
-      additional_latency_in_milliseconds = each.value.additional_latency_in_milliseconds
-    }
+  health_probe {
+    interval_in_seconds = 240
+    path                = "/"
+    protocol            = "Https"
+    request_type        = "HEAD"
   }
 
-  dynamic "health_probe" {
-    for_each = each.value.health_probe == null ? [] : ["enabled"]
-    content {
-      path                = each.value.path
-      protocol            = each.value.protocol
-      request_type        = each.value.request_type
-      interval_in_seconds = each.value.interval_in_seconds
-    }
+  load_balancing {
+    additional_latency_in_milliseconds = 0
+    sample_size                        = 16
+    successful_samples_required        = 3
   }
 }
 
 resource "azurerm_cdn_frontdoor_origin" "default" {
-  for_each                      = var.origins
+  for_each                      = var.origin
   name                          = each.key
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default[each.key].id
 
   enabled                        = each.value.enabled
-  host_name                      = each.value.host_name
+  host_name                      = var.frontend_endpoint
   http_port                      = each.value.http_port
   https_port                     = each.value.https_port
-  origin_host_header             = each.value.origin_host_header
+  origin_host_header             = var.frontend_endpoint
   priority                       = each.value.priority
   weight                         = each.value.weight
   certificate_name_check_enabled = each.value.certificate_name_check_enabled
 }
 
 resource "azurerm_cdn_frontdoor_route" "default" {
-  for_each                      = var.routes
+  for_each                      = var.route
   name                          = each.key
   cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.default[each.key].id
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.default[each.key].id
@@ -69,21 +60,21 @@ resource "azurerm_cdn_frontdoor_route" "default" {
 
   https_redirect_enabled = each.value.https_redirect_enabled
   link_to_default_domain = each.value.link_to_default_domain
-
-  cdn_frontdoor_origin_path = var.cdn_frontdoor_origin_path
 }
 
 resource "azurerm_cdn_frontdoor_custom_domain" "default" {
-  for_each                 = var.custom_domain
-  name                     = each.key
-  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default[each.key].id
-  host_name                = each.value.host_name
+  name                     = var.name
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.default.id
+  host_name                = var.domain_name
 
-  dynamic "tls" {
-    for_each = each.value.tls == null ? [] : ["enabled"]
-    content {
-      certificate_type    = each.value.certificate_type
-      minimum_tls_version = each.value.minimum_tls_version
-    }
+
+  tls {
+    certificate_type    = "ManagedCertificate"
+    minimum_tls_version = "TLS12"
   }
+}
+
+resource "azurerm_cdn_frontdoor_custom_domain_association" "default" {
+  cdn_frontdoor_custom_domain_id = azurerm_cdn_frontdoor_custom_domain.default.id
+  cdn_frontdoor_route_ids        = [azurerm_cdn_frontdoor_route.default[0].id]
 }
