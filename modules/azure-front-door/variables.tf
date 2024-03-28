@@ -38,7 +38,6 @@ variable "origin" {
   type = map(object({
     name                           = string
     custom_resource_name           = optional(string)
-    origin_group_name              = string
     enabled                        = optional(bool, true)
     certificate_name_check_enabled = optional(bool, true)
 
@@ -65,10 +64,7 @@ variable "route" {
     name                 = string
     custom_resource_name = optional(string)
     enabled              = optional(bool, true)
-
-    endpoint_name     = string
-    origin_group_name = string
-    origins_names     = list(string)
+  
 
     forwarding_protocol = optional(string, "MatchRequest")
     patterns_to_match   = optional(list(string), ["/*"])
