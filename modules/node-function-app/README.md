@@ -11,7 +11,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.80.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.102.0 |
 
 ## Modules
 
@@ -35,7 +35,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_action_group_low_id"></a> [action\_group\_low\_id](#input\_action\_group\_low\_id) | The ID of the Azure Monitor action group for low priority alerts | `string` | n/a | yes |
+| <a name="input_action_group_ids"></a> [action\_group\_ids](#input\_action\_group\_ids) | The IDs of the Azure Monitor action groups for different alert types | <pre>object({<br>    tech            = string,<br>    service_manager = string,<br>    iap             = string,<br>    its             = string,<br>    info_sec        = string<br>  })</pre> | n/a | yes |
+| <a name="input_app_insights_instrument_key"></a> [app\_insights\_instrument\_key](#input\_app\_insights\_instrument\_key) | If present, will be passed to the function to connect to App Insights. Overrides 'use\_app\_insights' | `string` | `null` | no |
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | The name of the function app | `string` | n/a | yes |
 | <a name="input_app_service_plan_id"></a> [app\_service\_plan\_id](#input\_app\_service\_plan\_id) | The id of the app service plan | `string` | n/a | yes |
 | <a name="input_app_settings"></a> [app\_settings](#input\_app\_settings) | The environment variables to be passed to the application | `map(string)` | `{}` | no |
@@ -54,7 +55,7 @@ No modules.
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | The suffix for resource naming | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service the app belongs to | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags applied to all resources | `map(string)` | n/a | yes |
-| <a name="input_use_app_insights"></a> [use\_app\_insights](#input\_use\_app\_insights) | Decides if monitoring should be enabled | `bool` | `false` | no |
+| <a name="input_use_app_insights"></a> [use\_app\_insights](#input\_use\_app\_insights) | If enabled, an App Insights instance will be created and associated with the function - unless app\_insights\_instrument\_key is set | `bool` | `false` | no |
 
 ## Outputs
 
