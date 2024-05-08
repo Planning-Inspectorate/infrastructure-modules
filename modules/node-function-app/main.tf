@@ -37,7 +37,7 @@ resource "azurerm_linux_function_app" "function_app" {
       node_version = var.function_node_version
     }
 
-    application_insights_key = var.use_app_insights ? azurerm_application_insights.function_app_insights.instrumentation_key : null
+    application_insights_key = local.app_insights_instrument_key
   }
 
   tags = var.tags
@@ -46,6 +46,8 @@ resource "azurerm_linux_function_app" "function_app" {
 }
 
 resource "azurerm_application_insights" "function_app_insights" {
+  count = local.app_insights.create ? 1 : 0
+
   name                = "pins-func-${var.service_name}-${var.app_name}-${var.resource_suffix}-app-insights"
   location            = var.location
   resource_group_name = var.resource_group_name

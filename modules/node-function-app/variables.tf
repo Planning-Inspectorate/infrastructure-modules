@@ -9,6 +9,12 @@ variable "action_group_ids" {
   })
 }
 
+variable "app_insights_instrument_key" {
+  description = "If present, will be passed to the function to connect to App Insights. Overrides 'use_app_insights'"
+  type        = string
+  default     = null
+}
+
 variable "app_name" {
   description = "The name of the function app"
   type        = string
@@ -109,7 +115,7 @@ variable "tags" {
 }
 
 variable "use_app_insights" {
-  description = "Decides if monitoring should be enabled"
+  description = "If enabled, an App Insights instance will be created and associated with the function - unless app_insights_instrument_key is set"
   type        = bool
   default     = false
 }
