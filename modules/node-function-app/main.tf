@@ -37,21 +37,12 @@ resource "azurerm_linux_function_app" "function_app" {
       node_version = var.function_node_version
     }
 
-    application_insights_key = local.app_insights_instrument_key
+    application_insights_key = var.app_insights_instrument_key
   }
 
   tags = var.tags
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
-}
-
-resource "azurerm_application_insights" "function_app_insights" {
-  count = local.app_insights.create ? 1 : 0
-
-  name                = "pins-func-${var.service_name}-${var.app_name}-${var.resource_suffix}-app-insights"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  application_type    = "web"
 }
 
 # setup key vault read access if configured

@@ -10,7 +10,7 @@ variable "action_group_ids" {
 }
 
 variable "app_insights_instrument_key" {
-  description = "If present, will be passed to the function to connect to App Insights. Overrides 'use_app_insights'"
+  description = "If present, will be passed to the function to connect to App Insights"
   type        = string
   default     = null
 }
@@ -112,10 +112,4 @@ variable "service_name" {
 variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)
-}
-
-variable "use_app_insights" {
-  description = "If enabled, an App Insights instance will be created and associated with the function - unless app_insights_instrument_key is set"
-  type        = bool
-  default     = false
 }

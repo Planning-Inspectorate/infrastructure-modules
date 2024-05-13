@@ -21,7 +21,6 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_application_insights.function_app_insights](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_insights) | resource |
 | [azurerm_key_vault_access_policy.read_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
 | [azurerm_linux_function_app.function_app](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_function_app) | resource |
 | [azurerm_monitor_activity_log_alert.function_app_delete](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert) | resource |
@@ -36,7 +35,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_action_group_ids"></a> [action\_group\_ids](#input\_action\_group\_ids) | The IDs of the Azure Monitor action groups for different alert types | <pre>object({<br>    tech            = string,<br>    service_manager = string,<br>    iap             = string,<br>    its             = string,<br>    info_sec        = string<br>  })</pre> | n/a | yes |
-| <a name="input_app_insights_instrument_key"></a> [app\_insights\_instrument\_key](#input\_app\_insights\_instrument\_key) | If present, will be passed to the function to connect to App Insights. Overrides 'use\_app\_insights' | `string` | `null` | no |
+| <a name="input_app_insights_instrument_key"></a> [app\_insights\_instrument\_key](#input\_app\_insights\_instrument\_key) | If present, will be passed to the function to connect to App Insights | `string` | `null` | no |
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | The name of the function app | `string` | n/a | yes |
 | <a name="input_app_service_plan_id"></a> [app\_service\_plan\_id](#input\_app\_service\_plan\_id) | The id of the app service plan | `string` | n/a | yes |
 | <a name="input_app_settings"></a> [app\_settings](#input\_app\_settings) | The environment variables to be passed to the application | `map(string)` | `{}` | no |
@@ -55,7 +54,6 @@ No modules.
 | <a name="input_resource_suffix"></a> [resource\_suffix](#input\_resource\_suffix) | The suffix for resource naming | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | The name of the service the app belongs to | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags applied to all resources | `map(string)` | n/a | yes |
-| <a name="input_use_app_insights"></a> [use\_app\_insights](#input\_use\_app\_insights) | If enabled, an App Insights instance will be created and associated with the function - unless app\_insights\_instrument\_key is set | `bool` | `false` | no |
 
 ## Outputs
 
