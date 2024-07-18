@@ -1,73 +1,23 @@
-parameters:
-  - name: environment
-    displayName: Environment
-    type: string
-    default: Dev
-    values:
-    - Dev
-    - Test
-    - Prod
+trigger: none
 
-variables:
-- group: Terraform ${{ parameters.environment }}
-- name: environment
-  value: ${{ lower(parameters.environment) }}
-
-pr: none
-
-trigger:
+pr:
   branches:
     include:
-    - '*'
+      - '*'
   paths:
     include:
     - modules
-    exclude:
-    - '**/README.md'
 
-pool:
-  vmImage: ubuntu-22.04
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      endpoint: Planning-Inspectorate
+      name: Planning-Inspectorate/common-pipeline-templates
+      ref: refs/tags/release/3.15.1
 
-stages:
-  - stage: Validate
-    jobs:
-    - job: Validate
-      steps:
-      # Checkout repo
-      - checkout: self
-        displayName: 'Checkout Repo'
-
-      # Install required packages
-      - template: steps/install-tflint.yaml
-      - template: steps/install-checkov.yaml
-
-      # Login to Azure using Terraform service principal
-      - template: steps/azure-login.yaml
-
-      # Run terraform init
-      - template: steps/terraform-init.yaml
-        parameters:
-          environment: ${{ variables.environment }}
-          workingDirectory: modules
-
-      # Run Terraform format
-      - template: steps/terraform-format.yaml
-        parameters:
-          workingDirectory: modules
-
-      # Run Terraform validate
-      - template: steps/terraform-validate.yaml
-        parameters:
-          workingDirectory: modules
-
-      # Run TFLint
-      - template: steps/tflint-validate.yaml
-        parameters:
-          configFilePath: $(Build.Repository.LocalPath)/.tflint.hcl
-          workingDirectory: modules
-
-      # Run Checkov
-      - template: steps/checkov-validate.yaml
-        parameters:
-          framework: terraform
-          workingDirectory: modules
+extends:
+  template: pipelines/terraform_checks.yml@templates
+  parameters:
+    workingDirectory: $(Build.Repository.LocalPath)/modules
+    tflintConfigPath: $(Build.Repository.LocalPath)/.tflint.hcl
