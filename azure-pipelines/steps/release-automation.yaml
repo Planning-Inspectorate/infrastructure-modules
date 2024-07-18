@@ -2,9 +2,6 @@ trigger:
   branches:
     include:
       - '*'
-  # tags:
-  #   include:
-  #     - '*'
 
 pool:
   vmImage: ubuntu-22.04
@@ -15,7 +12,7 @@ stages:
 
   jobs:
   - job: auto_release
-    displayName: auto_release
+    displayName: Release Tag
     workspace:
       clean: all
     timeoutInMinutes: 15
@@ -26,5 +23,5 @@ stages:
       - pwsh: |
           git branch
           $(Build.SourcesDirectory)\release-automation\Tag-Repo.ps1 -SourceBranch $(Build.SourceBranchName) -SourceDirectory $(Build.SourcesDirectory) -Mode "$env:MODE"
-        displayName: 'execute_auto_release_script'
+        displayName: 'Run Release Tag Script'
         name: 'execute_auto_release_script'
