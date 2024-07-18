@@ -43,6 +43,14 @@ resource "azurerm_linux_function_app" "function_app" {
   tags = var.tags
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  lifecycle {
+    ignore_changes = [
+      # ignore any changes to "hidden-link" and other tags
+      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
+      tags
+    ]
+  }
 }
 
 # setup key vault read access if configured

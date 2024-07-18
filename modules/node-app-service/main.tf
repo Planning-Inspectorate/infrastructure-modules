@@ -58,7 +58,10 @@ resource "azurerm_linux_web_app" "web_app" {
 
   lifecycle {
     ignore_changes = [
-      site_config["application_stack"]
+      site_config["application_stack"],
+      # ignore any changes to "hidden-link" and other tags
+      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
+      tags
     ]
   }
 
@@ -104,7 +107,10 @@ resource "azurerm_linux_web_app_slot" "staging" {
 
   lifecycle {
     ignore_changes = [
-      site_config["application_stack"]
+      site_config["application_stack"],
+      # ignore any changes to "hidden-link" and other tags
+      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
+      tags
     ]
   }
 
