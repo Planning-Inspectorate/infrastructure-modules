@@ -65,12 +65,13 @@ variable "endpoint_subnet_id" {
   type        = string
 }
 
-variable "front_door_restriction" {
-  description = "Flag to indicate if the web app should be restricted so it can only be accessed via Front Door"
-  nullable    = false
-  type        = bool
-  default     = false
-}
+# not in use so fails the tf lint
+# variable "front_door_restriction" {
+#   description = "Flag to indicate if the web app should be restricted so it can only be accessed via Front Door"
+#   nullable    = false
+#   type        = bool
+#   default     = false
+# }
 
 variable "health_check_path" {
   description = "The path of the service's health check endpoint"

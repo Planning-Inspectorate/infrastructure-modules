@@ -27,7 +27,6 @@ module "node_app_service" {
   tags                                  = var.tags
 
   providers = {
-    azurerm         = azurerm
-    azurerm.tooling = azurerm.tooling
+    azurerm = azurerm
   }
 }
