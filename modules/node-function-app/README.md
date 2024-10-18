@@ -5,13 +5,15 @@ This Terraform module creates a Function App to deploy Azure functions.
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.0, < 5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.102.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.110.0 |
 
 ## Modules
 
