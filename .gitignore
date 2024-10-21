@@ -8,6 +8,19 @@
 *.tfstate
 *.tfstate.*
 
+# Ignore transient lock info files created by terraform apply
+.terraform.tfstate.lock.info
+
+# Include override files you do wish to add to version control using negated pattern
+# !example_override.tf
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+# example: *tfplan*
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
 # Crash log files
 crash.log
 
@@ -16,6 +29,26 @@ crash.log
 # version control.
 #
 # example.tfvars
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Optional npm cache directory
+.npm
+
+# package-lock.json files that do not belong to the root
+package-lock.json
+!./package-lock.json
+
+# Certificates
+*.pem
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
@@ -30,3 +63,6 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+# VSCode
+.vscode
