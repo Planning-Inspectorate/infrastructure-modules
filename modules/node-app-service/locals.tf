@@ -2,10 +2,10 @@ locals {
   app_settings = merge(
     var.app_settings,
     {
-      DOCKER_ENABLE_CI                = true
-      DOCKER_REGISTRY_SERVER_PASSWORD = base64encode(data.azurerm_container_registry.acr.admin_password)
-      DOCKER_REGISTRY_SERVER_URL      = data.azurerm_container_registry.acr.login_server
-      DOCKER_REGISTRY_SERVER_USERNAME = data.azurerm_container_registry.acr.admin_username
+      DOCKER_ENABLE_CI         = true
+      docker_registry_password = sensitive(data.azurerm_container_registry.acr.admin_password)
+      docker_registry_url      = data.azurerm_container_registry.acr.login_server
+      docker_registry_username = data.azurerm_container_registry.acr.admin_username
     }
   )
 }
