@@ -37,6 +37,7 @@ resource "azurerm_linux_web_app" "web_app" {
     http2_enabled                     = true
     health_check_path                 = var.health_check_path
     health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
+    
     application_stack {
       docker_registry_url = "https://${data.azurerm_container_registry.acr.login_server}"
       docker_image_name   = "${var.image_name}:main"
