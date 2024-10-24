@@ -88,6 +88,12 @@ variable "monitoring_alerts_enabled" {
   type        = bool
 }
 
+variable "monitoring_location" {
+  description = "The name of the app service location"
+  type        = string
+  default     = "global"
+}
+
 variable "outbound_vnet_connectivity" {
   default     = false
   description = "Indicates whether outbound connectivity (VNET Integration) is required"

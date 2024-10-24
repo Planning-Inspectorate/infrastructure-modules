@@ -1,6 +1,8 @@
 module "node_app_service" {
   source = "../"
 
+  tooling_config = var.tooling_config
+
   action_group_ids                      = var.action_group_ids
   app_name                              = var.app_name
   app_service_plan_id                   = var.app_service_plan_id
@@ -27,7 +29,6 @@ module "node_app_service" {
   tags                                  = var.tags
 
   providers = {
-    azurerm         = azurerm
-    azurerm.tooling = azurerm.tooling
+    azurerm = azurerm
   }
 }

@@ -7,14 +7,14 @@ This Terraform module creates an App service to deploy backend or frontend servi
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | 4.5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.94.0 |
-| <a name="provider_azurerm.tooling"></a> [azurerm.tooling](#provider\_azurerm.tooling) | 3.94.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 4.5.0 |
+| <a name="provider_azurerm.tooling"></a> [azurerm.tooling](#provider\_azurerm.tooling) | 4.5.0 |
 
 ## Modules
 
@@ -24,20 +24,21 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_app_service_certificate.custom_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_certificate) | resource |
-| [azurerm_app_service_custom_hostname_binding.custom_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/app_service_custom_hostname_binding) | resource |
-| [azurerm_key_vault_access_policy.read_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_key_vault_access_policy.read_secrets_staging_slot](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault_access_policy) | resource |
-| [azurerm_linux_web_app.web_app](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app) | resource |
-| [azurerm_linux_web_app_slot.staging](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app_slot) | resource |
-| [azurerm_monitor_activity_log_alert.app_service_stop](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_activity_log_alert) | resource |
-| [azurerm_monitor_diagnostic_setting.web_app_logs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_diagnostic_setting) | resource |
-| [azurerm_monitor_metric_alert.app_service_http_5xx](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
-| [azurerm_monitor_metric_alert.app_service_response_time](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_metric_alert) | resource |
-| [azurerm_private_endpoint.private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
-| [azurerm_private_endpoint.private_endpoint_staging](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
-| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
-| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/container_registry) | data source |
+| [azurerm_app_service_certificate.custom_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/app_service_certificate) | resource |
+| [azurerm_app_service_custom_hostname_binding.custom_hostname](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/app_service_custom_hostname_binding) | resource |
+| [azurerm_key_vault_access_policy.read_secrets](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_key_vault_access_policy.read_secrets_staging_slot](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/key_vault_access_policy) | resource |
+| [azurerm_linux_web_app.web_app](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/linux_web_app) | resource |
+| [azurerm_linux_web_app_slot.staging](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/linux_web_app_slot) | resource |
+| [azurerm_monitor_activity_log_alert.app_service_delete](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/monitor_activity_log_alert) | resource |
+| [azurerm_monitor_activity_log_alert.app_service_stop](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/monitor_activity_log_alert) | resource |
+| [azurerm_monitor_diagnostic_setting.web_app_logs](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/monitor_diagnostic_setting) | resource |
+| [azurerm_monitor_metric_alert.app_service_http_5xx](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/monitor_metric_alert) | resource |
+| [azurerm_monitor_metric_alert.app_service_response_time](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/monitor_metric_alert) | resource |
+| [azurerm_private_endpoint.private_endpoint](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/private_endpoint) | resource |
+| [azurerm_private_endpoint.private_endpoint_staging](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/resources/private_endpoint) | resource |
+| [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/data-sources/client_config) | data source |
+| [azurerm_container_registry.acr](https://registry.terraform.io/providers/hashicorp/azurerm/4.5.0/docs/data-sources/container_registry) | data source |
 
 ## Inputs
 

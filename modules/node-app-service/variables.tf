@@ -83,6 +83,12 @@ variable "health_check_path" {
   default     = null
 }
 
+variable "health_check_eviction_time_in_min" {
+  description = "The path of the service's health check endpoint"
+  type        = number
+  default     = 10
+}
+
 variable "image_name" {
   description = "The name of the image deployed to the App Service"
   type        = string
@@ -122,6 +128,13 @@ variable "monitoring_alerts_enabled" {
   type        = bool
 }
 
+variable "monitoring_location" {
+  description = "The name of the app service location"
+  type        = string
+  default     = "global"
+}
+
+
 variable "outbound_vnet_connectivity" {
   default     = false
   description = "Indicates whether outbound connectivity (VNET Integration) is required"
@@ -146,4 +159,15 @@ variable "service_name" {
 variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)
+}
+
+variable "tooling_config" {
+  description = "Config for the tooling subscription resources"
+  type = object({
+    container_registry_name = string
+    container_registry_rg   = string
+    network_name            = string
+    network_rg              = string
+    subscription_id         = string
+  })
 }

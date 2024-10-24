@@ -65,13 +65,6 @@ variable "endpoint_subnet_id" {
   type        = string
 }
 
-variable "front_door_restriction" {
-  description = "Flag to indicate if the web app should be restricted so it can only be accessed via Front Door"
-  nullable    = false
-  type        = bool
-  default     = false
-}
-
 variable "health_check_path" {
   description = "The path of the service's health check endpoint"
   type        = string
@@ -145,4 +138,15 @@ variable "tags" {
 variable "tooling_subscription_id" {
   description = "The ID for the Tooling subscription that houses the Container Registry"
   type        = string
+}
+
+variable "tooling_config" {
+  description = "Config for the tooling subscription resources"
+  type = object({
+    container_registry_name = string
+    container_registry_rg   = string
+    network_name            = string
+    network_rg              = string
+    subscription_id         = string
+  })
 }
