@@ -37,10 +37,12 @@ resource "azurerm_linux_web_app" "web_app" {
     http2_enabled                     = true
     health_check_path                 = var.health_check_path
     health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
-    
+
     application_stack {
-      docker_registry_url = "https://${data.azurerm_container_registry.acr.login_server}"
       docker_image_name   = "${var.image_name}:main"
+      docker_registry_password = sensitive(data.azurerm_container_registry.acr.admin_password)
+      docker_registry_url      = "https://${data.azurerm_container_registry.acr.login_server}"
+      docker_registry_username = data.azurerm_container_registry.acr.admin_username
     }
 
     dynamic "ip_restriction" {
@@ -99,8 +101,10 @@ resource "azurerm_linux_web_app_slot" "staging" {
     http2_enabled = true
 
     application_stack {
-      docker_registry_url = "https://${data.azurerm_container_registry.acr.login_server}"
       docker_image_name   = "${var.image_name}:main"
+      docker_registry_password = sensitive(data.azurerm_container_registry.acr.admin_password)
+      docker_registry_url      = "https://${data.azurerm_container_registry.acr.login_server}"
+      docker_registry_username = data.azurerm_container_registry.acr.admin_username
     }
   }
 
@@ -118,7 +122,6 @@ resource "azurerm_linux_web_app_slot" "staging" {
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
 }
 
-# TODO: I think this is redundant, Front Door does SSL termination for our DNS names and then routs requests to https://*.azurewebsites.net
 resource "azurerm_app_service_certificate" "custom_hostname" {
   count = var.custom_hostname != null ? 1 : 0
 
