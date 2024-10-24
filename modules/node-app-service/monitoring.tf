@@ -70,7 +70,7 @@ resource "azurerm_monitor_metric_alert" "app_service_response_time" {
 resource "azurerm_monitor_activity_log_alert" "app_service_stop" {
   name                = "App Service Stopped - ${reverse(split("/", azurerm_linux_web_app.web_app.id))[0]}"
   resource_group_name = var.resource_group_name
-  location            = var.location
+  location            = var.monitoring_location
   enabled             = var.monitoring_alerts_enabled
   scopes              = [azurerm_linux_web_app.web_app.id]
   description         = "Sends an alert when the App Service is stopped"
@@ -102,7 +102,7 @@ resource "azurerm_monitor_activity_log_alert" "app_service_stop" {
 resource "azurerm_monitor_activity_log_alert" "app_service_delete" {
   name                = "App Service Deleted - ${reverse(split("/", azurerm_linux_web_app.web_app.id))[0]}"
   resource_group_name = var.resource_group_name
-  location            = var.location
+  location            = var.monitoring_location
   enabled             = var.monitoring_alerts_enabled
   scopes              = [azurerm_linux_web_app.web_app.id]
   description         = "Sends an alert when the App Service is deleted"
