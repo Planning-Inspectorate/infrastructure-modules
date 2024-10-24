@@ -139,3 +139,14 @@ variable "tooling_subscription_id" {
   description = "The ID for the Tooling subscription that houses the Container Registry"
   type        = string
 }
+
+variable "tooling_config" {
+  description = "Config for the tooling subscription resources"
+  type = object({
+    container_registry_name = string
+    container_registry_rg   = string
+    network_name            = string
+    network_rg              = string
+    subscription_id         = string
+  })
+}
