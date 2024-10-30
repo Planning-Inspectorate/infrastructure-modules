@@ -113,3 +113,8 @@ variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)
 }
+
+variable "use_app_insights" {
+  description = "Use app insights"
+  type        = bool
+}
