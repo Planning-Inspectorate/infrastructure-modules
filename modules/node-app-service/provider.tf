@@ -10,7 +10,6 @@ terraform {
   required_version = ">= 1.5.7, < 1.10.0"
 }
 
-
 # provider "azurerm" {
 #   alias           = "tooling"
 #   subscription_id = var.tooling_config.subscription_id
