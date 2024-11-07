@@ -80,6 +80,7 @@ resource "azurerm_monitor_activity_log_alert" "app_service_stop" {
     resource_id    = azurerm_linux_web_app.web_app.id
     category       = "Administrative"
     operation_name = "Microsoft.Web/sites/stop/Action"
+    level          = "Critical"
   }
 
   action {
@@ -112,6 +113,7 @@ resource "azurerm_monitor_activity_log_alert" "app_service_delete" {
     resource_id    = azurerm_linux_web_app.web_app.id
     category       = "Administrative"
     operation_name = "Microsoft.Web/sites/Delete"
+    level          = "Critical"
   }
 
   action {
