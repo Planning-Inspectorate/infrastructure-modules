@@ -38,8 +38,10 @@ resource "azurerm_linux_web_app" "web_app" {
     health_check_path = var.health_check_path
 
     application_stack {
-      docker_registry_url = "https://${data.azurerm_container_registry.acr.login_server}"
-      docker_image_name   = "${var.image_name}:main"
+      docker_image_name        = "${var.image_name}:main"
+      docker_registry_url      = "https://${data.azurerm_container_registry.acr.login_server}"
+      docker_registry_password = sensitive(data.azurerm_container_registry.acr.admin_password)
+      docker_registry_username = data.azurerm_container_registry.acr.admin_username
     }
 
     dynamic "ip_restriction" {
@@ -94,12 +96,16 @@ resource "azurerm_linux_web_app_slot" "staging" {
   }
 
   site_config {
-    always_on     = true
-    http2_enabled = true
+    always_on                         = true
+    http2_enabled                     = true
+    health_check_path                 = var.health_check_path
+    health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
 
     application_stack {
-      docker_registry_url = "https://${data.azurerm_container_registry.acr.login_server}"
-      docker_image_name   = "${var.image_name}:main"
+      docker_image_name        = "${var.image_name}:main"
+      docker_registry_url      = "https://${data.azurerm_container_registry.acr.login_server}"
+      docker_registry_password = sensitive(data.azurerm_container_registry.acr.admin_password)
+      docker_registry_username = data.azurerm_container_registry.acr.admin_username
     }
   }
 
