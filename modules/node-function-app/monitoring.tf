@@ -13,7 +13,7 @@ resource "azurerm_monitor_diagnostic_setting" "function_app_logs" {
 
   lifecycle {
     ignore_changes = [
-      log,
+      enabled_log,
       metric
     ]
   }
@@ -70,6 +70,7 @@ resource "azurerm_monitor_metric_alert" "function_app_response_time" {
 resource "azurerm_monitor_activity_log_alert" "function_app_stop" {
   name                = "Function App Stopped - ${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
   resource_group_name = var.resource_group_name
+  location            = "Global"
   enabled             = var.monitoring_alerts_enabled
   scopes              = [azurerm_linux_function_app.function_app.id]
   description         = "Sends an alert when the Function App is stopped"
@@ -101,6 +102,7 @@ resource "azurerm_monitor_activity_log_alert" "function_app_stop" {
 resource "azurerm_monitor_activity_log_alert" "function_app_delete" {
   name                = "Function App Deleted - ${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
   resource_group_name = var.resource_group_name
+  location            = "Global"
   enabled             = var.monitoring_alerts_enabled
   scopes              = [azurerm_linux_function_app.function_app.id]
   description         = "Sends an alert when the Function App is deleted"
