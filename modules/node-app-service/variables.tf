@@ -83,12 +83,6 @@ variable "health_check_path" {
   default     = null
 }
 
-variable "health_check_eviction_time_in_min" {
-  description = "The path of the service's health check endpoint"
-  type        = number
-  default     = 10
-}
-
 variable "image_name" {
   description = "The name of the image deployed to the App Service"
   type        = string
