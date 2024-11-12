@@ -30,14 +30,15 @@ resource "azurerm_linux_function_app" "function_app" {
   }
 
   site_config {
-    always_on     = true
-    http2_enabled = true
+    always_on                = true
+    http2_enabled            = true
+    application_insights_key = var.app_insights_instrument_key
 
     application_stack {
       node_version = var.function_node_version
     }
 
-    application_insights_key = var.app_insights_instrument_key
+
   }
 
   tags = var.tags
