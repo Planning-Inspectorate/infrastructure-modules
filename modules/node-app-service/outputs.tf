@@ -8,9 +8,9 @@ output "principal_id" {
   value       = azurerm_linux_web_app.web_app.identity[0].principal_id
 }
 
-output "slot_principal_id" {
-  description = "The ID of the principal associated with the App Service Slot"
-  value       = azurerm_linux_web_app_slot.web_app.identity[0].principal_id
+output "staging_principal_id" {
+  description = "The ID of the principal associated with the App Service staging slot"
+  value       = azurerm_linux_web_app_slot.staging.identity[0].principal_id
 }
 
 output "id" {
