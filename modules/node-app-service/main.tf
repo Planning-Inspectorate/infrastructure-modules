@@ -45,6 +45,7 @@ resource "azurerm_linux_web_app" "web_app" {
       docker_registry_username = data.azurerm_container_registry.acr.admin_username
     }
 
+    ip_restriction_default_action = var.front_door_restriction ? "Deny" : "Allow"
     dynamic "ip_restriction" {
       for_each = var.front_door_restriction ? [1] : []
 
@@ -107,6 +108,18 @@ resource "azurerm_linux_web_app_slot" "staging" {
       docker_registry_url      = "https://${data.azurerm_container_registry.acr.login_server}"
       docker_registry_password = sensitive(data.azurerm_container_registry.acr.admin_password)
       docker_registry_username = data.azurerm_container_registry.acr.admin_username
+    }
+
+    ip_restriction_default_action = var.front_door_restriction ? "Deny" : "Allow"
+    dynamic "ip_restriction" {
+      for_each = var.front_door_restriction ? [1] : []
+
+      content {
+        name        = "FrontDoorInbound"
+        service_tag = "AzureFrontDoor.Backend"
+        action      = "Allow"
+        priority    = 100
+      }
     }
   }
 
