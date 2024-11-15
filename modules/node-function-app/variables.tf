@@ -117,4 +117,5 @@ variable "tags" {
 variable "use_app_insights" {
   description = "Decides if monitoring should be enabled"
   type        = bool
+  default     = false
 }
