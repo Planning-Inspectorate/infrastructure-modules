@@ -19,17 +19,17 @@ variable "app_service_plan_id" {
   type        = string
 }
 
-variable "app_settings" {
-  description = "The environment variables to be passed to the application"
-  type        = map(string)
-  default     = {}
-}
+# variable "app_settings" {
+#   description = "The environment variables to be passed to the application"
+#   type        = map(string)
+#   default     = {}
+# }
 
-variable "connection_strings" {
-  description = "The connection strings to add to this Function App"
-  type        = list(map(string))
-  default     = []
-}
+# variable "connection_strings" {
+#   description = "The connection strings to add to this Function App"
+#   type        = list(map(string))
+#   default     = []
+# }
 
 variable "function_apps_storage_account" {
   description = "The name of the storage account used by the Function Apps"
@@ -42,17 +42,17 @@ variable "function_apps_storage_account_access_key" {
   sensitive   = true
 }
 
-variable "function_node_version" {
-  default     = 14
-  description = "Node version for function"
-  type        = number
-}
+# variable "function_node_version" {
+#   default     = 14
+#   description = "Node version for function"
+#   type        = number
+# }
 
-variable "integration_subnet_id" {
-  default     = null
-  description = "The id of the vnet integration subnet the app service is linked to for egress traffic"
-  type        = string
-}
+# variable "integration_subnet_id" {
+#   default     = null
+#   description = "The id of the vnet integration subnet the app service is linked to for egress traffic"
+#   type        = string
+# }
 
 variable "location" {
   description = "The name of the app service location"
@@ -70,11 +70,11 @@ variable "monitoring_alerts_enabled" {
   type        = bool
 }
 
-variable "outbound_vnet_connectivity" {
-  default     = false
-  description = "Indicates whether outbound connectivity (VNET Integration) is required"
-  type        = bool
-}
+# variable "outbound_vnet_connectivity" {
+#   default     = false
+#   description = "Indicates whether outbound connectivity (VNET Integration) is required"
+#   type        = bool
+# }
 
 variable "resource_group_name" {
   description = "The name of the resource group"
