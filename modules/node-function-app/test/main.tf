@@ -13,4 +13,5 @@ module "node_app_service" {
   resource_suffix                          = var.resource_suffix
   service_name                             = var.service_name
   tags                                     = var.tags
+  use_app_insights                         = var.use_app_insights
 }
