@@ -37,6 +37,17 @@ variable "app_settings" {
   default     = {}
 }
 
+#auth setting
+
+variable "auth_config" {
+  description = "Config for the frontdoor in tooling subscription"
+  type = object({
+    auth_client_id       = string
+    auth_provider_secret = string
+    auth_tenant_endpoint = string
+  })
+}
+
 # variable "back_office_integration_subnet_id" {
 #   description = "Integration subnet for back office anti-virus resources"
 #   type        = string

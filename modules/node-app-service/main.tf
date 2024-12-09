@@ -70,6 +70,31 @@ resource "azurerm_linux_web_app" "web_app" {
   }
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  # auth settings
+  auth_settings_v2 {
+    auth_enabled           = true
+    default_provider       = "azureactivedirectory"
+    runtime_version        = "~2"
+    unauthenticated_action = "Return403" #default: RedirectToLoginPage
+    require_https          = true
+    active_directory_v2 {
+      client_id                  = var.auth_config.auth_client_id
+      client_secret_setting_name = var.auth_config.auth_provider_secret
+      tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+    }
+    login {
+      token_store_enabled = true
+    }
+    # microsoft_v2 {
+    #   client_id =  "<value>"
+    #   client_secret_setting_name = "<value>"
+    #   allowed_audiences = "<value>"
+    #   login_scopes = "<value>"
+
+    # }
+  }
+
 }
 
 resource "azurerm_linux_web_app_slot" "staging" {
@@ -135,6 +160,29 @@ resource "azurerm_linux_web_app_slot" "staging" {
   }
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  auth_settings_v2 {
+    auth_enabled           = true
+    default_provider       = "azureactivedirectory"
+    runtime_version        = "~2"
+    unauthenticated_action = "Return403" #default: RedirectToLoginPage
+    require_https          = true
+    active_directory_v2 {
+      client_id                  = var.auth_config.auth_client_id
+      client_secret_setting_name = var.auth_config.auth_provider_secret
+      tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+    }
+    login {
+      token_store_enabled = true
+    }
+    # microsoft_v2 {
+    #   client_id =  "<value>"
+    #   client_secret_setting_name = "<value>"
+    #   allowed_audiences = "<value>"
+    #   login_scopes = "<value>"
+
+    # }
+  }
 }
 
 # TODO: I think this is redundant, Front Door does SSL termination for our DNS names and then routs requests to https://*.azurewebsites.net
