@@ -165,7 +165,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
     auth_enabled           = true
     default_provider       = "azureactivedirectory"
     runtime_version        = "~2"
-    unauthenticated_action = "Return403" #default: RedirectToLoginPage
+    unauthenticated_action = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
     require_https          = true
     active_directory_v2 {
       client_id                  = var.auth_config.auth_client_id
