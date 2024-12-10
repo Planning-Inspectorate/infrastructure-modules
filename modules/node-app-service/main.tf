@@ -84,10 +84,16 @@ resource "azurerm_linux_web_app" "web_app" {
       client_id                  = var.auth_config.auth_client_id
       client_secret_setting_name = var.auth_config.auth_provider_secret
       tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+      allowed_audiences = [
+        -"https://pins-fde-template-edgaf3g2cgejhyca.a03.azurefd.net/.auth/login/microsoft/callback",
+        -"https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback",
+      ]
     }
     login {
-      token_store_enabled            = true
-      # allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      token_store_enabled = true
+      allowed_external_redirect_urls = [
+        -"https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback",
+      ]
     }
     # microsoft_v2 {
     #   client_id =  "<value>"
@@ -176,10 +182,16 @@ resource "azurerm_linux_web_app_slot" "staging" {
       client_id                  = var.auth_config.auth_client_id
       client_secret_setting_name = var.auth_config.auth_provider_secret
       tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+      allowed_audiences = [
+        -"https://pins-fde-template-edgaf3g2cgejhyca.a03.azurefd.net/.auth/login/microsoft/callback",
+        -"https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback",
+      ]
     }
     login {
-      token_store_enabled            = true
-      # allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      token_store_enabled = true
+      allowed_external_redirect_urls = [
+        -"https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback",
+      ]
     }
     # microsoft_v2 {
     #   client_id =  "<value>"
