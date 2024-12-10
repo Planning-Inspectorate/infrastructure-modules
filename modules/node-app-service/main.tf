@@ -162,11 +162,12 @@ resource "azurerm_linux_web_app_slot" "staging" {
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
 
   auth_settings_v2 {
-    auth_enabled           = true
-    default_provider       = "azureactivedirectory"
-    runtime_version        = "~2"
-    unauthenticated_action = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
-    require_https          = true
+    auth_enabled             = true
+    default_provider         = "azureactivedirectory"
+    runtime_version          = "~2"
+    unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
+    require_https            = true
+    forward_proxy_convention = Standard
     active_directory_v2 {
       client_id                  = var.auth_config.auth_client_id
       client_secret_setting_name = var.auth_config.auth_provider_secret
