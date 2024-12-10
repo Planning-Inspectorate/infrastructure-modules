@@ -86,7 +86,7 @@ resource "azurerm_linux_web_app" "web_app" {
       tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
     }
     login {
-      token_store_enabled = true
+      token_store_enabled            = true
       allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
     }
     # microsoft_v2 {
@@ -178,7 +178,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
       tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
     }
     login {
-      token_store_enabled = true
+      token_store_enabled            = true
       allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
     }
     # microsoft_v2 {
