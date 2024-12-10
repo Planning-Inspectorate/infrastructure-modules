@@ -73,11 +73,13 @@ resource "azurerm_linux_web_app" "web_app" {
 
   # auth settings
   auth_settings_v2 {
-    auth_enabled           = true
-    default_provider       = "azureactivedirectory"
-    runtime_version        = "~2"
-    unauthenticated_action = "Return403" #default: RedirectToLoginPage
-    require_https          = true
+    auth_enabled             = true
+    default_provider         = "azureactivedirectory"
+    runtime_version          = "~1"
+    require_authentication   = true
+    unauthenticated_action   = "Return302" #default: RedirectToLoginPage other:Return403
+    require_https            = true
+    forward_proxy_convention = "Standard"
     active_directory_v2 {
       client_id                  = var.auth_config.auth_client_id
       client_secret_setting_name = var.auth_config.auth_provider_secret
@@ -85,6 +87,7 @@ resource "azurerm_linux_web_app" "web_app" {
     }
     login {
       token_store_enabled = true
+      allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
     }
     # microsoft_v2 {
     #   client_id =  "<value>"
@@ -166,7 +169,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
     default_provider         = "azureactivedirectory"
     runtime_version          = "~1"
     require_authentication   = true
-    unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
+    unauthenticated_action   = "Return302" #default: RedirectToLoginPage other:Return403
     require_https            = true
     forward_proxy_convention = "Standard"
     active_directory_v2 {
@@ -176,6 +179,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
     }
     login {
       token_store_enabled = true
+      allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
     }
     # microsoft_v2 {
     #   client_id =  "<value>"
