@@ -87,7 +87,7 @@ resource "azurerm_linux_web_app" "web_app" {
     }
     login {
       token_store_enabled            = true
-      allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      # allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
     }
     # microsoft_v2 {
     #   client_id =  "<value>"
@@ -179,7 +179,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
     }
     login {
       token_store_enabled            = true
-      allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      # allowed_external_redirect_urls = "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
     }
     # microsoft_v2 {
     #   client_id =  "<value>"
