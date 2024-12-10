@@ -77,7 +77,7 @@ resource "azurerm_linux_web_app" "web_app" {
     default_provider         = "azureactivedirectory"
     runtime_version          = "~1"
     require_authentication   = true
-    unauthenticated_action   = "Return302" #default: RedirectToLoginPage other:Return403
+    unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
     require_https            = true
     forward_proxy_convention = "Standard"
     active_directory_v2 {
@@ -169,7 +169,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
     default_provider         = "azureactivedirectory"
     runtime_version          = "~1"
     require_authentication   = true
-    unauthenticated_action   = "Return302" #default: RedirectToLoginPage other:Return403
+    unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
     require_https            = true
     forward_proxy_convention = "Standard"
     active_directory_v2 {
