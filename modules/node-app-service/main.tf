@@ -115,7 +115,7 @@ resource "azurerm_linux_web_app" "web_app" {
       "XDT_MicrosoftApplicationInsightsJava",
       "XDT_MicrosoftApplicationInsights_NodeJS",
     ]
-    connection_string_names = []
+    # connection_string_names = []
   }
 
 }
