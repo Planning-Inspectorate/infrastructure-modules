@@ -87,6 +87,9 @@ resource "azurerm_linux_web_app" "web_app" {
       allowed_audiences = [
         "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
       ]
+      allowed_applications = [
+        "623081bf-a1f2-4cae-ba90-b5d264c46373"
+      ]
     }
     login {
       token_store_enabled            = true
@@ -174,6 +177,9 @@ resource "azurerm_linux_web_app_slot" "staging" {
       tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
       allowed_audiences = [
         "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      ]
+      allowed_applications = [
+        "623081bf-a1f2-4cae-ba90-b5d264c46373"
       ]
     }
     login {
