@@ -88,7 +88,7 @@ resource "azurerm_linux_web_app" "web_app" {
         "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
       ]
       allowed_applications = [
-        "623081bf-a1f2-4cae-ba90-b5d264c46373"
+        var.auth_config.allowed_audiences
       ]
     }
     login {
@@ -178,7 +178,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
         "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
       ]
       allowed_applications = [
-        "623081bf-a1f2-4cae-ba90-b5d264c46373"
+        var.auth_config.allowed_audiences
       ]
     }
     login {

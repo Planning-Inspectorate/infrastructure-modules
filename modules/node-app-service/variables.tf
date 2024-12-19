@@ -45,6 +45,7 @@ variable "auth_config" {
     auth_client_id       = string
     auth_provider_secret = string
     auth_tenant_endpoint = string
+    allowed_audiences    = string
   })
 }
 
