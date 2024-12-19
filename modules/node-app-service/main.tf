@@ -70,6 +70,32 @@ resource "azurerm_linux_web_app" "web_app" {
   }
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  # auth settings
+  auth_settings_v2 {
+    auth_enabled             = true
+    default_provider         = "azureactivedirectory"
+    runtime_version          = "~1"
+    require_authentication   = true
+    unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
+    require_https            = true
+    forward_proxy_convention = "Standard"
+    active_directory_v2 {
+      client_id                  = var.auth_config.auth_client_id
+      client_secret_setting_name = var.auth_config.auth_provider_secret
+      tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+      allowed_audiences = [
+        "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      ]
+      allowed_applications = [
+        var.auth_config.allowed_audiences
+      ]
+    }
+    login {
+      token_store_enabled            = true
+      allowed_external_redirect_urls = []
+    }
+  }
 }
 
 resource "azurerm_linux_web_app_slot" "staging" {
@@ -135,6 +161,32 @@ resource "azurerm_linux_web_app_slot" "staging" {
   }
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  # auth settings
+  auth_settings_v2 {
+    auth_enabled             = true
+    default_provider         = "azureactivedirectory"
+    runtime_version          = "~1"
+    require_authentication   = true
+    unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
+    require_https            = true
+    forward_proxy_convention = "Standard"
+    active_directory_v2 {
+      client_id                  = var.auth_config.auth_client_id
+      client_secret_setting_name = var.auth_config.auth_provider_secret
+      tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+      allowed_audiences = [
+        "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+      ]
+      allowed_applications = [
+        var.auth_config.allowed_audiences
+      ]
+    }
+    login {
+      token_store_enabled            = true
+      allowed_external_redirect_urls = []
+    }
+  }
 }
 
 # TODO: I think this is redundant, Front Door does SSL termination for our DNS names and then routs requests to https://*.azurewebsites.net
