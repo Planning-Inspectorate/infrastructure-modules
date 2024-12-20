@@ -37,6 +37,20 @@ variable "app_settings" {
   default     = {}
 }
 
+#EasyAuth setting
+variable "auth_config" {
+  description = "Config for the Azure Easy Authentication"
+  type = object({
+    auth_enabled           = bool
+    require_authentication = bool
+    auth_client_id         = string
+    auth_provider_secret   = string
+    auth_tenant_endpoint   = string
+    allowed_audiences      = string
+    allowed_applications   = string
+  })
+}
+
 # variable "back_office_integration_subnet_id" {
 #   description = "Integration subnet for back office anti-virus resources"
 #   type        = string
