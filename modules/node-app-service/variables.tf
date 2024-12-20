@@ -39,12 +39,15 @@ variable "app_settings" {
 
 #EasyAuth setting
 variable "auth_config" {
-  description = "Config for the frontdoor in tooling subscription"
+  description = "Config for the Azure Easy Authentication"
   type = object({
-    auth_client_id       = string
-    auth_provider_secret = string
-    auth_tenant_endpoint = string
-    allowed_audiences    = string
+    auth_enabled           = bool
+    require_authentication = bool
+    auth_client_id         = string
+    auth_provider_secret   = string
+    auth_tenant_endpoint   = string
+    allowed_audiences      = string
+    allowed_applications   = string
   })
 }
 
