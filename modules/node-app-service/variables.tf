@@ -48,9 +48,7 @@ variable "auth_config" {
     auth_provider_secret   = string
     auth_tenant_endpoint   = string
     allowed_audiences      = string
-    allowed_audiences      = string
-
-
+    allowed_applications   = string
   })
 }
 

@@ -88,7 +88,7 @@ resource "azurerm_linux_web_app" "web_app" {
         var.auth_config.allowed_audiences
       ]
       allowed_applications = [
-        var.auth_config.applications
+        var.auth_config.allowed_applications
       ]
     }
     login {
