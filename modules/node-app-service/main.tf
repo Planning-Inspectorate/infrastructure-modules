@@ -163,10 +163,10 @@ resource "azurerm_linux_web_app_slot" "staging" {
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
 
   auth_settings_v2 {
-    auth_enabled             = true
+    auth_enabled             = var.auth_config.auth_enabled
     default_provider         = "azureactivedirectory"
     runtime_version          = "~1"
-    require_authentication   = true
+    require_authentication   = var.auth_config.require_authentication
     unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
     require_https            = true
     forward_proxy_convention = "Standard"
@@ -175,10 +175,10 @@ resource "azurerm_linux_web_app_slot" "staging" {
       client_secret_setting_name = var.auth_config.auth_provider_secret
       tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
       allowed_audiences = [
-        "https://template-service-dev.planninginspectorate.gov.uk/.auth/login/aad/callback"
+        var.auth_config.allowed_audiences
       ]
       allowed_applications = [
-        var.auth_config.allowed_audiences
+        var.auth_config.allowed_applications
       ]
     }
     login {
