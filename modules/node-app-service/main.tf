@@ -102,8 +102,9 @@ resource "azurerm_linux_web_app_slot" "staging" {
   name           = "staging"
   app_service_id = azurerm_linux_web_app.web_app.id
 
-  client_certificate_enabled = false
-  https_only                 = true
+  client_certificate_enabled    = false
+  https_only                    = true
+  public_network_access_enabled = !var.inbound_vnet_connectivity
 
   app_settings = local.app_settings
 
