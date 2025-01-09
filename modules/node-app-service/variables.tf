@@ -37,6 +37,12 @@ variable "app_settings" {
   default     = {}
 }
 
+variable "slot_setting_overrides" {
+  description = "The environment variable names that should be different on slots, will be marked as sticky"
+  type        = map(string)
+  default     = {}
+}
+
 #EasyAuth setting
 variable "auth_config" {
   description = "Config for the Azure Easy Authentication"
