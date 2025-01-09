@@ -16,6 +16,14 @@ resource "azurerm_linux_web_app" "web_app" {
 
   app_settings = local.app_settings
 
+  dynamic "sticky_settings" {
+    for_each = length(var.slot_setting_overrides) > 0 ? [1] : []
+
+    content {
+      app_setting_names = keys(var.slot_setting_overrides)
+    }
+  }
+
   identity {
     type = "SystemAssigned"
   }
@@ -108,7 +116,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
   client_certificate_enabled = false
   https_only                 = true
 
-  app_settings = local.app_settings
+  app_settings = merge(local.app_settings, var.slot_setting_overrides)
 
   identity {
     type = "SystemAssigned"
