@@ -52,6 +52,12 @@ variable "auth_config" {
   default = {
     auth_enabled           = false
     require_authentication = false
+    auth_client_id         = null
+    auth_provider_secret   = null
+    auth_tenant_endpoint   = null
+    allowed_applications   = ""
+    allowed_audiences      = ""
+
   }
 }
 
