@@ -49,6 +49,10 @@ variable "auth_config" {
     allowed_audiences      = string
     allowed_applications   = string
   })
+  default = {
+    auth_enabled           = false
+    require_authentication = false
+  }
 }
 
 # variable "back_office_integration_subnet_id" {
