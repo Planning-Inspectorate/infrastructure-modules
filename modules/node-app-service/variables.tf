@@ -104,7 +104,7 @@ variable "front_door_restriction" {
 variable "health_check_path" {
   description = "The path of the service's health check endpoint"
   type        = string
-  default     = null
+  default     = "/health"
 }
 
 variable "health_check_eviction_time_in_min" {
