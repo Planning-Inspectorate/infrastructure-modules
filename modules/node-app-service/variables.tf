@@ -49,6 +49,16 @@ variable "auth_config" {
     allowed_audiences      = string
     allowed_applications   = string
   })
+  default = {
+    auth_enabled           = false
+    require_authentication = false
+    auth_client_id         = null
+    auth_provider_secret   = null
+    auth_tenant_endpoint   = null
+    allowed_applications   = ""
+    allowed_audiences      = ""
+
+  }
 }
 
 # variable "back_office_integration_subnet_id" {
