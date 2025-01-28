@@ -12,9 +12,17 @@ resource "azurerm_linux_web_app" "web_app" {
   service_plan_id               = var.app_service_plan_id
   client_certificate_enabled    = false
   https_only                    = true
-  public_network_access_enabled = !var.inbound_vnet_connectivity
+  public_network_access_enabled = var.public_network_access
 
   app_settings = local.app_settings
+
+  dynamic "sticky_settings" {
+    for_each = length(var.slot_setting_overrides) > 0 ? [1] : []
+
+    content {
+      app_setting_names = keys(var.slot_setting_overrides)
+    }
+  }
 
   identity {
     type = "SystemAssigned"
@@ -70,16 +78,46 @@ resource "azurerm_linux_web_app" "web_app" {
   }
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  # auth settings
+  dynamic "auth_settings_v2" {
+    for_each = var.auth_config.auth_enabled ? [1] : []
+    content {
+      auth_enabled             = var.auth_config.auth_enabled
+      default_provider         = "azureactivedirectory"
+      runtime_version          = "~1"
+      require_authentication   = var.auth_config.require_authentication
+      unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
+      require_https            = true
+      forward_proxy_convention = "Standard"
+      active_directory_v2 {
+        client_id                  = var.auth_config.auth_client_id
+        client_secret_setting_name = var.auth_config.auth_provider_secret
+        tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+        allowed_audiences = [
+          var.auth_config.allowed_audiences
+        ]
+        allowed_applications = [
+          var.auth_config.allowed_applications
+        ]
+      }
+      login {
+        token_store_enabled            = true
+        allowed_external_redirect_urls = []
+      }
+    }
+  }
 }
 
 resource "azurerm_linux_web_app_slot" "staging" {
   name           = "staging"
   app_service_id = azurerm_linux_web_app.web_app.id
 
-  client_certificate_enabled = false
-  https_only                 = true
+  client_certificate_enabled    = false
+  https_only                    = true
+  public_network_access_enabled = var.public_network_access
 
-  app_settings = local.app_settings
+  app_settings = merge(local.app_settings, var.slot_setting_overrides)
 
   identity {
     type = "SystemAssigned"
@@ -135,6 +173,35 @@ resource "azurerm_linux_web_app_slot" "staging" {
   }
 
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
+
+  # auth settings
+  dynamic "auth_settings_v2" {
+    for_each = var.auth_config.auth_enabled ? [1] : []
+    content {
+      auth_enabled             = var.auth_config.auth_enabled
+      default_provider         = "azureactivedirectory"
+      runtime_version          = "~1"
+      require_authentication   = var.auth_config.require_authentication
+      unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
+      require_https            = true
+      forward_proxy_convention = "Standard"
+      active_directory_v2 {
+        client_id                  = var.auth_config.auth_client_id
+        client_secret_setting_name = var.auth_config.auth_provider_secret
+        tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+        allowed_audiences = [
+          var.auth_config.allowed_audiences
+        ]
+        allowed_applications = [
+          var.auth_config.allowed_applications
+        ]
+      }
+      login {
+        token_store_enabled            = true
+        allowed_external_redirect_urls = []
+      }
+    }
+  }
 }
 
 # TODO: I think this is redundant, Front Door does SSL termination for our DNS names and then routs requests to https://*.azurewebsites.net

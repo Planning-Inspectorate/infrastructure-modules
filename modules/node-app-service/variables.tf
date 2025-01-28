@@ -37,6 +37,36 @@ variable "app_settings" {
   default     = {}
 }
 
+variable "slot_setting_overrides" {
+  description = "The environment variable names that should be different on slots, will be marked as sticky"
+  type        = map(string)
+  default     = {}
+}
+
+#EasyAuth setting
+variable "auth_config" {
+  description = "Config for the Azure Easy Authentication"
+  type = object({
+    auth_enabled           = bool
+    require_authentication = bool
+    auth_client_id         = string
+    auth_provider_secret   = string
+    auth_tenant_endpoint   = string
+    allowed_audiences      = string
+    allowed_applications   = string
+  })
+  default = {
+    auth_enabled           = false
+    require_authentication = false
+    auth_client_id         = null
+    auth_provider_secret   = null
+    auth_tenant_endpoint   = null
+    allowed_applications   = ""
+    allowed_audiences      = ""
+
+  }
+}
+
 # variable "back_office_integration_subnet_id" {
 #   description = "Integration subnet for back office anti-virus resources"
 #   type        = string
@@ -80,12 +110,13 @@ variable "front_door_restriction" {
 variable "health_check_path" {
   description = "The path of the service's health check endpoint"
   type        = string
-  default     = null
+  default     = "/health"
 }
 
 variable "health_check_eviction_time_in_min" {
   description = "The path of the service's health check endpoint"
   type        = number
+  default     = 10
 }
 
 variable "image_name" {
@@ -130,6 +161,11 @@ variable "monitoring_alerts_enabled" {
 variable "outbound_vnet_connectivity" {
   default     = false
   description = "Indicates whether outbound connectivity (VNET Integration) is required"
+  type        = bool
+}
+
+variable "public_network_access" {
+  description = "Indicates whether public_network_access should be enabled or not"
   type        = bool
 }
 
