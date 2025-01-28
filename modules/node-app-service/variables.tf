@@ -164,6 +164,11 @@ variable "outbound_vnet_connectivity" {
   type        = bool
 }
 
+variable "public_network_access" {
+  description = "Indicates whether public_network_access should be enabled or not"
+  type        = bool
+}
+
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string
