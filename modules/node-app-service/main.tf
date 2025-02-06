@@ -66,17 +66,6 @@ resource "azurerm_linux_web_app" "web_app" {
     }
   }
 
-  tags = var.tags
-
-  lifecycle {
-    ignore_changes = [
-      site_config["application_stack"],
-      # ignore any changes to "hidden-link" and other tags
-      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
-      tags
-    ]
-  }
-
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
 
   # auth settings
@@ -106,6 +95,20 @@ resource "azurerm_linux_web_app" "web_app" {
         allowed_external_redirect_urls = []
       }
     }
+  }
+
+  tags = var.tags
+
+  lifecycle {
+    ignore_changes = [
+      # ignore any changes to the docker image, since the image tag changes per deployment
+      # all other site_config and application_stack changes should be tracked
+      # see state file to check structure: site_config and application_stack are arrays in state, with a single entry
+      site_config[0].application_stack[0].docker_image_name,
+      # ignore any changes to "hidden-link" and other tags
+      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
+      tags
+    ]
   }
 }
 
@@ -161,17 +164,6 @@ resource "azurerm_linux_web_app_slot" "staging" {
     }
   }
 
-  tags = var.tags
-
-  lifecycle {
-    ignore_changes = [
-      site_config["application_stack"],
-      # ignore any changes to "hidden-link" and other tags
-      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
-      tags
-    ]
-  }
-
   virtual_network_subnet_id = var.outbound_vnet_connectivity ? var.integration_subnet_id : null
 
   # auth settings
@@ -201,6 +193,20 @@ resource "azurerm_linux_web_app_slot" "staging" {
         allowed_external_redirect_urls = []
       }
     }
+  }
+
+  tags = var.tags
+
+  lifecycle {
+    ignore_changes = [
+      # ignore any changes to the docker image, since the image tag changes per deployment
+      # all other site_config and application_stack changes should be tracked
+      # see state file to check structure: site_config and application_stack are arrays in state, with a single entry
+      site_config[0].application_stack[0].docker_image_name,
+      # ignore any changes to "hidden-link" and other tags
+      # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
+      tags
+    ]
   }
 }
 
