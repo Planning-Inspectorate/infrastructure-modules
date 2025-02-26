@@ -188,3 +188,10 @@ variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)
 }
+
+# see https://learn.microsoft.com/en-us/azure/app-service/manage-scale-per-app#recommended-configuration-for-high-density-hosting
+variable "worker_count" {
+  description = "The number of workers for the app service (when using per site scaling)"
+  type        = number
+  default     = null
+}
