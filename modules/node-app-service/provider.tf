@@ -6,7 +6,7 @@ terraform {
       configuration_aliases = [azurerm, azurerm.tooling]
     }
   }
-  required_version = ">= 1.5.7, < 1.10.0"
+  required_version = ">= 1.5.7, < 1.12.0"
 }
 
 # provider "azurerm" {
