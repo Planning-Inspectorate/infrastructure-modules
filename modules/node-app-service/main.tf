@@ -74,9 +74,10 @@ resource "azurerm_linux_web_app" "web_app" {
     for_each = var.auth_config.auth_enabled ? [1] : []
     content {
       auth_enabled             = var.auth_config.auth_enabled
+      require_authentication   = var.auth_config.require_authentication
+      excluded_paths           = var.auth_config.excluded_paths
       default_provider         = "azureactivedirectory"
       runtime_version          = "~1"
-      require_authentication   = var.auth_config.require_authentication
       unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
       require_https            = true
       forward_proxy_convention = "Standard"
@@ -172,9 +173,10 @@ resource "azurerm_linux_web_app_slot" "staging" {
     for_each = var.auth_config.auth_enabled ? [1] : []
     content {
       auth_enabled             = var.auth_config.auth_enabled
+      require_authentication   = var.auth_config.require_authentication
+      excluded_paths           = var.auth_config.excluded_paths
       default_provider         = "azureactivedirectory"
       runtime_version          = "~1"
-      require_authentication   = var.auth_config.require_authentication
       unauthenticated_action   = "RedirectToLoginPage" #default: RedirectToLoginPage other:Return403
       require_https            = true
       forward_proxy_convention = "Standard"
