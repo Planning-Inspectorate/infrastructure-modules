@@ -186,9 +186,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
         allowed_audiences = [
           var.auth_config.allowed_audiences
         ]
-        allowed_applications = [
-          var.auth_config.allowed_applications
-        ]
+        allowed_applications = var.auth_config.allowed_applications
       }
       login {
         token_store_enabled            = true
