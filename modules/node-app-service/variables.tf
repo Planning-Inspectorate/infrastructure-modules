@@ -73,6 +73,12 @@ variable "auth_config" {
 #   type        = string
 # }
 
+variable "client_affinity_enabled" {
+  description = "Should session affinity be enabled?"
+  type        = bool
+  default     = null
+}
+
 variable "container_registry_name" {
   description = "The name of the container registry that hosts the image"
   type        = string

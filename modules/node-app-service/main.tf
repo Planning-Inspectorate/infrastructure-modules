@@ -13,6 +13,7 @@ resource "azurerm_linux_web_app" "web_app" {
   client_certificate_enabled    = false
   https_only                    = true
   public_network_access_enabled = var.public_network_access
+  client_affinity_enabled       = var.client_affinity_enabled
 
   app_settings = local.app_settings
 
