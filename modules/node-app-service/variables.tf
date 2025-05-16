@@ -54,7 +54,7 @@ variable "auth_config" {
     auth_tenant_endpoint   = string
     allowed_audiences      = string
     allowed_applications   = string
-    excluded_paths         = list(string)
+    excluded_paths         = optional(list(string))
   })
   default = {
     auth_enabled           = false
