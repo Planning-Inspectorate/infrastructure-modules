@@ -6,6 +6,7 @@ resource "azurerm_linux_web_app" "web_app" {
   #checkov:skip=CKV_AZURE_213: App Service health check may not be required
   #TODO: Private Endpoints
   #checkov:skip=CKV_AZURE_222: Ensure that Azure Web App public network access is disabled
+  #checkov:skip=CKV_SECRET_6: "Skipping due to Key Vault usage"
   name                          = "pins-app-${var.service_name}-${var.app_name}-${var.resource_suffix}"
   location                      = var.location
   resource_group_name           = var.resource_group_name
