@@ -122,6 +122,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
   client_certificate_enabled    = false
   https_only                    = true
   public_network_access_enabled = var.public_network_access
+  client_affinity_enabled       = var.client_affinity_enabled
 
   app_settings = merge(local.app_settings, var.slot_setting_overrides)
 
@@ -146,6 +147,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
     http2_enabled                     = true
     health_check_path                 = var.health_check_path
     health_check_eviction_time_in_min = var.health_check_eviction_time_in_min
+    worker_count                      = var.worker_count
 
     application_stack {
       docker_image_name        = "${var.image_name}:main"
