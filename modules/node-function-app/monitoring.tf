@@ -68,7 +68,7 @@ resource "azurerm_monitor_metric_alert" "function_app_response_time" {
 }
 
 resource "azurerm_monitor_activity_log_alert" "function_app_stop" {
-  name                = "Function App Stopped - ${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
+  name                = "FunctionAppStopped-${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
   resource_group_name = var.resource_group_name
   location            = "Global"
   enabled             = var.monitoring_alerts_enabled
@@ -101,7 +101,7 @@ resource "azurerm_monitor_activity_log_alert" "function_app_stop" {
 }
 
 resource "azurerm_monitor_activity_log_alert" "function_app_delete" {
-  name                = "Function App Deleted - ${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
+  name                = "FunctionAppDeleted-${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
   resource_group_name = var.resource_group_name
   location            = "Global"
   enabled             = var.monitoring_alerts_enabled
