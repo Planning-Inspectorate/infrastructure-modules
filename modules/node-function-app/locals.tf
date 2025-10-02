@@ -3,8 +3,11 @@ locals {
     # override host.json file log level
     # see https://learn.microsoft.com/en-us/azure/azure-functions/configure-monitoring?tabs=v2#configure-log-levels
     # and https://learn.microsoft.com/en-us/azure/azure-functions/functions-host-json#override-hostjson-values
-    AzureFunctionsJobHost__logging__fileLoggingMode   = "debugOnly"
-    AzureFunctionsJobHost__logging__logLevel__default = "Warning"
+    AzureFunctionsJobHost__logging__fileLoggingMode            = "debugOnly"
+    AzureFunctionsJobHost__logging__logLevel__default          = "Warning"
+    AzureFunctionsJobHost__logging__logLevel__Host__Aggregator = "Trace"
+    AzureFunctionsJobHost__logging__logLevel__Host__Results    = "Information"
+    AzureFunctionsJobHost__logging__logLevel__Function         = "Information"
 
     SCM_DO_BUILD_DURING_DEPLOYMENT = false
     # run from the zip file
