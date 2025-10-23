@@ -7,7 +7,7 @@ resource "azurerm_monitor_diagnostic_setting" "function_app_logs" {
     category = "FunctionAppLogs"
   }
 
-  metric {
+  enabled_log {
     category = "AllMetrics"
   }
 
@@ -43,6 +43,7 @@ resource "azurerm_monitor_metric_alert" "function_app_http_5xx" {
   }
 }
 
+# This one as well
 resource "azurerm_monitor_metric_alert" "function_app_response_time" {
   name                = "Response Time - ${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
   resource_group_name = var.resource_group_name
@@ -100,6 +101,7 @@ resource "azurerm_monitor_activity_log_alert" "function_app_stop" {
   }
 }
 
+# I'M ASSUMING THIS ONE TOO
 resource "azurerm_monitor_activity_log_alert" "function_app_delete" {
   name                = "Function App Deleted - ${reverse(split("/", azurerm_linux_function_app.function_app.id))[0]}"
   resource_group_name = var.resource_group_name

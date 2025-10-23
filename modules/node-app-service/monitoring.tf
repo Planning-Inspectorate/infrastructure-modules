@@ -7,7 +7,7 @@ resource "azurerm_monitor_diagnostic_setting" "web_app_logs" {
     category = "AppServiceConsoleLogs"
   }
 
-  metric {
+  enabled_log {
     category = "AllMetrics"
   }
 
@@ -19,6 +19,7 @@ resource "azurerm_monitor_diagnostic_setting" "web_app_logs" {
   }
 }
 
+##### I think this one would need to be tagged?
 resource "azurerm_monitor_metric_alert" "app_service_http_5xx" {
   name                = "Http 5xx - ${reverse(split("/", azurerm_linux_web_app.web_app.id))[0]}"
   resource_group_name = var.resource_group_name
@@ -67,6 +68,7 @@ resource "azurerm_monitor_metric_alert" "app_service_response_time" {
   }
 }
 
+##### I think this one would need to be tagged?
 resource "azurerm_monitor_activity_log_alert" "app_service_stop" {
   name                = "App Service Stopped - ${reverse(split("/", azurerm_linux_web_app.web_app.id))[0]}"
   resource_group_name = var.resource_group_name
@@ -100,6 +102,7 @@ resource "azurerm_monitor_activity_log_alert" "app_service_stop" {
   }
 }
 
+##### I think this one would need to be tagged?
 resource "azurerm_monitor_activity_log_alert" "app_service_delete" {
   name                = "App Service Deleted - ${reverse(split("/", azurerm_linux_web_app.web_app.id))[0]}"
   resource_group_name = var.resource_group_name
