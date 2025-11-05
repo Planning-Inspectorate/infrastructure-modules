@@ -11,5 +11,5 @@ variable "extra_tags" {
 
 output "tags" {
   description = "output for the tags"
-  value = merge(var.base_tags, var.extra_tags)
+  value       = merge(var.base_tags, var.extra_tags)
 }
