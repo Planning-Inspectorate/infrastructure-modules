@@ -110,7 +110,7 @@ resource "azurerm_linux_web_app" "web_app" {
       site_config[0].application_stack[0].docker_image_name,
       # ignore any changes to "hidden-link" and other tags
       # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
-      tags["hidden-link:*"]
+      tags
     ]
   }
 }
@@ -211,7 +211,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
       site_config[0].application_stack[0].docker_image_name,
       # ignore any changes to "hidden-link" and other tags
       # see https://github.com/hashicorp/terraform-provider-azurerm/issues/16569
-      tags["hidden-link:*"]
+      tags
     ]
   }
 }
