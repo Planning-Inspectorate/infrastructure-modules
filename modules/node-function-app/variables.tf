@@ -94,6 +94,15 @@ variable "outbound_vnet_connectivity" {
   type        = bool
 }
 
+variable "private_endpoint" {
+  description = "Configuration to use if using private endpoints (also set inbound_vnet_connectivity=true)"
+  default     = null
+  type = object({
+    subnet_id           = string
+    private_dns_zone_id = string
+  })
+}
+
 variable "resource_group_name" {
   description = "The name of the resource group"
   type        = string

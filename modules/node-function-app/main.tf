@@ -53,6 +53,29 @@ resource "azurerm_linux_function_app" "function_app" {
   }
 }
 
+resource "azurerm_private_endpoint" "private_endpoint" {
+  count = var.inbound_vnet_connectivity ? 1 : 0
+
+  name                = "pins-pe-${var.service_name}-${var.app_name}-${var.resource_suffix}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  subnet_id           = var.private_endpoint.subnet_id
+
+  private_dns_zone_group {
+    name                 = "appserviceprivatednszone"
+    private_dns_zone_ids = [var.private_endpoint.private_dns_zone_id]
+  }
+
+  private_service_connection {
+    name                           = "privateendpointconnection"
+    private_connection_resource_id = azurerm_linux_function_app.function_app.id
+    subresource_names              = ["sites"]
+    is_manual_connection           = false
+  }
+
+  tags = var.tags
+}
+
 # setup key vault read access if configured
 resource "azurerm_key_vault_access_policy" "read_secrets" {
   count = var.key_vault_id != null ? 1 : 0
