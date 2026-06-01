@@ -86,6 +86,7 @@ resource "azurerm_linux_web_app" "web_app" {
         client_id                  = var.auth_config.auth_client_id
         client_secret_setting_name = var.auth_config.auth_provider_secret
         tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+        allowed_groups             = try(var.auth_config.allowed_groups, [])
         allowed_audiences = [
           var.auth_config.allowed_audiences
         ]
@@ -187,6 +188,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
         client_id                  = var.auth_config.auth_client_id
         client_secret_setting_name = var.auth_config.auth_provider_secret
         tenant_auth_endpoint       = var.auth_config.auth_tenant_endpoint
+        allowed_groups             = try(var.auth_config.allowed_groups, [])
         allowed_audiences = [
           var.auth_config.allowed_audiences
         ]
