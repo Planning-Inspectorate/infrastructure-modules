@@ -124,7 +124,7 @@ resource "azurerm_linux_web_app_slot" "staging" {
   public_network_access_enabled = var.public_network_access
   client_affinity_enabled       = var.client_affinity_enabled
 
-  app_settings = merge(local.app_settings, var.slot_setting_overrides)
+  app_settings = merge(local.app_settings, var.staging_slot_setting_overrides)
 
   identity {
     type = "SystemAssigned"
