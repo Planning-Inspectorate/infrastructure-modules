@@ -142,6 +142,14 @@ resource "azurerm_linux_web_app_slot" "staging" {
     }
   }
 
+  dynamic "sticky_settings" {
+    for_each = length(var.staging_slot_setting_overrides) > 0 ? [1] : []
+
+    content {
+      app_setting_names = keys(var.staging_slot_setting_overrides)
+    }
+  }
+
   site_config {
     always_on                         = true
     http2_enabled                     = true

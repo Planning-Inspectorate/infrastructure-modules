@@ -191,6 +191,12 @@ variable "service_name" {
   type        = string
 }
 
+variable "staging_slot_setting_overrides" {
+  description = "The variable names that should be different on the staging slot, will be marked as sticky"
+  type        = map(string)
+  default     = {}
+}
+
 variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)
