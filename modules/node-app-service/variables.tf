@@ -194,10 +194,10 @@ variable "service_name" {
 variable "storage_account_mounts" {
   description = "The storage account mounts for the app service"
   type = object({
-    name               = string
-    storage_account_id = string
-    share_name         = string
-    mount_path         = string
+    name         = string
+    account_name = string
+    share_name   = string
+    mount_path   = string
   })
   default = null
 }
