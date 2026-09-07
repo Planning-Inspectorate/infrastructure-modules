@@ -191,6 +191,17 @@ variable "service_name" {
   type        = string
 }
 
+variable "storage_account_mounts" {
+  description = "The storage account mounts for the app service"
+  type = object({
+    name               = string
+    storage_account_id = string
+    share_name         = string
+    mount_path         = string
+  })
+  default = null
+}
+
 variable "tags" {
   description = "The tags applied to all resources"
   type        = map(string)

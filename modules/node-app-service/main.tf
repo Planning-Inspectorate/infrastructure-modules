@@ -101,6 +101,17 @@ resource "azurerm_linux_web_app" "web_app" {
     }
   }
 
+  dynamic "storage_account_mounts" {
+    for_each = length(var.storage_account_mounts) > 0 ? [1] : []
+
+    content {
+      name               = var.storage_account_mounts.name
+      storage_account_id = var.storage_account_mounts.storage_account_id
+      share_name         = var.storage_account_mounts.share_name
+      mount_path         = var.storage_account_mounts.mount_path
+    }
+  }
+
   tags = var.tags
 
   lifecycle {
@@ -200,6 +211,17 @@ resource "azurerm_linux_web_app_slot" "staging" {
         token_store_enabled            = true
         allowed_external_redirect_urls = []
       }
+    }
+  }
+
+  dynamic "storage_account_mounts" {
+    for_each = length(var.storage_account_mounts) > 0 ? [1] : []
+
+    content {
+      name               = var.storage_account_mounts.name
+      storage_account_id = var.storage_account_mounts.storage_account_id
+      share_name         = var.storage_account_mounts.share_name
+      mount_path         = var.storage_account_mounts.mount_path
     }
   }
 
