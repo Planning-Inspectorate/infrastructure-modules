@@ -192,12 +192,14 @@ variable "service_name" {
 }
 
 variable "storage_account_mounts" {
-  description = "The storage account mounts for the app service"
+  description = "Optional Azure Files mount configuration for Linux Web App."
   type = object({
     name         = string
     account_name = string
     share_name   = string
     mount_path   = string
+    access_key   = optional(string)
+    type         = optional(string, "AzureFiles")
   })
   default = null
 }

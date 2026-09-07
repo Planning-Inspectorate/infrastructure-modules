@@ -101,14 +101,16 @@ resource "azurerm_linux_web_app" "web_app" {
     }
   }
 
-  dynamic "storage_account_mounts" {
-    for_each = length(var.storage_account_mounts) > 0 ? [1] : []
+  dynamic "storage_account" {
+    for_each = var.storage_account_mounts == null ? [] : [1]
 
     content {
       name         = var.storage_account_mounts.name
       account_name = var.storage_account_mounts.account_name
       share_name   = var.storage_account_mounts.share_name
       mount_path   = var.storage_account_mounts.mount_path
+      access_key   = try(var.storage_account_mounts.access_key, null)
+      type         = try(var.storage_account_mounts.type, "AzureFiles")
     }
   }
 
@@ -214,14 +216,16 @@ resource "azurerm_linux_web_app_slot" "staging" {
     }
   }
 
-  dynamic "storage_account_mounts" {
-    for_each = length(var.storage_account_mounts) > 0 ? [1] : []
+  dynamic "storage_account" {
+    for_each = var.storage_account_mounts == null ? [] : [1]
 
     content {
-      name               = var.storage_account_mounts.name
-      storage_account_id = var.storage_account_mounts.storage_account_id
-      share_name         = var.storage_account_mounts.share_name
-      mount_path         = var.storage_account_mounts.mount_path
+      name         = var.storage_account_mounts.name
+      account_name = var.storage_account_mounts.account_name
+      share_name   = var.storage_account_mounts.share_name
+      mount_path   = var.storage_account_mounts.mount_path
+      access_key   = try(var.storage_account_mounts.access_key, null)
+      type         = try(var.storage_account_mounts.type, "AzureFiles")
     }
   }
 
