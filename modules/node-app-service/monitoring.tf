@@ -7,14 +7,14 @@ resource "azurerm_monitor_diagnostic_setting" "web_app_logs" {
     category = "AppServiceConsoleLogs"
   }
 
-  metric {
+  enabled_metric {
     category = "AllMetrics"
   }
 
   lifecycle {
     ignore_changes = [
       enabled_log,
-      metric
+      enabled_metric
     ]
   }
 }
